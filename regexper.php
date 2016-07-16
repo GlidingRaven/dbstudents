@@ -11,6 +11,5 @@
 	fwrite($fp, $regex);
 	fclose($fp);
 	
-
 	echo "ok";
 ?>
