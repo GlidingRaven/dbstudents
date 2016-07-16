@@ -1,4 +1,9 @@
-
+<?php
+if ($_COOKIE["passer"]<>"325373c671bd18c9c526be384516c5da") {
+  header("HTTP/1.1 403 Forbidden" );
+  exit();
+}
+echo '
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -148,7 +153,7 @@
             </div>
             
             <div role="tabpanel" class="tab-pane" id="handbook">
-                <h1 class="page-header">Обновление regex'a</h1>
+                <h1 class="page-header">Обновление regex\'a</h1>
                 <p><a href="#source" class="btn btn-primary" aria-controls="source" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a></p>
                 <div class="input-group">
                   <span class="input-group-addon" id="basic-addon1">Выражение</span>
@@ -162,4 +167,5 @@
       </div>
     </div>
   </body>
-</html>
+</html>';
+?>

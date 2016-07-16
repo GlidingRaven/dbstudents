@@ -1,3 +1,9 @@
+<?php
+  if ($_COOKIE["passer"]<>"325373c671bd18c9c526be384516c5da") {
+    echo("403 Forbidden" );
+    exit();
+  }
+?>
 <!DOCTYPE html>
 <html><head>
     <meta charset="utf-8">
