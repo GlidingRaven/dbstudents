@@ -11,7 +11,7 @@ function forsource(){
   var date_month = $('#date_month').val();
   var date_year = $('#date_year').val();
   
-  $.post("addersource.php", { bigtext: bigtext, name_uz: name_uz, date_day: date_day, date_month: date_month, date_year: date_year, url_source: url_source } )
+  $.post("transformers/addersource.php", { bigtext: bigtext, name_uz: name_uz, date_day: date_day, date_month: date_month, date_year: date_year, url_source: url_source } )
     .done(function(data) {alert("Data Loaded: " + data);$("#bigtext").val("");$("#url_source").val("");})
     .fail(function() {
     alert("fail");
@@ -23,8 +23,7 @@ function foruz(){
   var full_name_uz = $('#full_name_uz').val();
   var abb_name_uz = $('#abb_name_uz').val();
   var url_site = $('#url_site').val();
-  //alert("syka");
-  $.post("adderuz.php", { city_code: city_code, full_name_uz: full_name_uz, abb_name_uz: abb_name_uz, url_site: url_site } )
+  $.post("transformers/adderuz.php", { city_code: city_code, full_name_uz: full_name_uz, abb_name_uz: abb_name_uz, url_site: url_site } )
     .done(function(data) {
         if(Number(data)==200){
                 alert("ok");$("#city_code").val("");$("#full_name_uz").val("");$("#abb_name_uz").val("");$("#url_site").val("");}
@@ -38,7 +37,7 @@ function foruz(){
 
 function forcity(){
   var city = $('#city_name').val();
-  $.post("addercity.php", {city: city} )
+  $.post("transformers/addercity.php", {city: city} )
     .done(function(data) {
         if(Number(data)==200){
                 alert("ok");
@@ -53,7 +52,7 @@ function forcity(){
 
 function forregexp(){
   var regexper = $('#regular_exp').val();
-  $.post("regexper.php", {regexper: regexper} )
+  $.post("transformers/regexper.php", {regexper: regexper} )
     .done(function(data) {
         if(Number(data)==200){
                 alert("ok");}
@@ -63,14 +62,3 @@ function forregexp(){
     alert("fail");
   });
   }
-
-//$.post(
-//  "mouse.php",
-//  {
-//    param1: "param1",
-//    param2: 2
-//  },
-//  onAjaxSuccess
-//);
- 
-//function onAjaxSuccess(data){alert(data);}
