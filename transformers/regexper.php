@@ -7,9 +7,9 @@
 	if (strlen($regex)==0){echo("Не заполнено | is not filled");exit();}
 	if (strlen($regex)>512){echo("Слишком большой | too big");exit();}
 
-	$needle = '\\';
-	$replace = '\\\\';
-	$regex = str_replace($needle, $replace, $regex);
+	//$needle = '\\';
+	//$replace = '\\\\';
+	//$regex = str_replace($needle, $replace, $regex);
 	$regex = "/".$regex ."/u";
 
 	$fp = fopen('regex.txt', "w");

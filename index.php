@@ -157,7 +157,7 @@ echo '
                 <p><a href="#source" class="btn btn-primary" aria-controls="source" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a></p>
                 <div class="input-group">
                   <span class="input-group-addon" id="basic-addon1">Выражение</span>
-                  <input type="text" class="form-control" value="([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s.{0,20}(\d{3})[^\d]" id="regular_exp">
+                  <input type="text" class="form-control" value="([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s.{0,20}?([1-9][0-9]{1,2})[^0-9]" id="regular_exp">
                 </div><br>
                 <p><button type="button" class="btn btn-primary btn-lg" id="buttonregexp" href="#">Ввод</button></p>
             </div>
