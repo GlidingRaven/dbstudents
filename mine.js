@@ -11,9 +11,12 @@ function forsource(){
   var date_month = $('#date_month').val();
   var date_year = $('#date_year').val();
   
-  $.post("transformers/addersource.php", { bigtext: bigtext, name_uz: name_uz, date_day: date_day, date_month: date_month, date_year: date_year, url_source: url_source } )
-    .done(function(data) {alert("Data Loaded: " + data);$("#bigtext").val("");$("#url_source").val("");})
-    .fail(function() {
+  $.post("transformers/preaddersource.php", { bigtext: bigtext, name_uz: name_uz, date_day: date_day, date_month: date_month, date_year: date_year, url_source: url_source } )
+    .done(function(data) {//alert("Data Loaded: " + data);$("#bigtext").val("");$("#url_source").val("");
+    $("#source").html(data);
+    window.scrollTo(0,0);
+                         })
+    .fail(function(data) {
     alert("fail");
   });
   }

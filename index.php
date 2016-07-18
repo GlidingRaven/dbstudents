@@ -82,7 +82,7 @@ echo '
                 <div class="col-md-2">
                   <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon1">День</span>
-                    <input type="text" maxlength="2" class="form-control" placeholder="7" id="date_day">
+                    <input type="text" maxlength="2" class="form-control" id="date_day">
                   </div><!-- /input-group -->
                 </div><!-- /.col-lg-2 -->
                 <div class="col-md-3">
@@ -111,7 +111,10 @@ echo '
                   </div><!-- /input-group -->
                 <br>
                 <p><textarea rows="25" cols="90" name="text" class="form-control" id="bigtext" autofocus></textarea></p>
-                <p><button type="button" class="btn btn-primary btn-lg" id="buttonforsource" href="#">Ввод</button></p>
+                <div class="row">
+                  <div class="col-md-5"><button type="button" class="btn btn-primary btn-lg" id="buttonforsource" href="#">Ввод</button></div>
+                  <div class="col-md-7"></div>
+                </div>
             </div>
             
             <div role="tabpanel" class="tab-pane" id="uz">

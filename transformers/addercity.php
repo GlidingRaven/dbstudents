@@ -1,7 +1,7 @@
 <?php
 	if ($_COOKIE["passer"]<>"325373c671bd18c9c526be384516c5da") {
-	  echo("403 Forbidden" );
-	  exit();
+		echo("403 Forbidden" );
+		exit();
 	}
 	
 	$sqlconnect = mysql_connect('localhost', 'rainadmin_exp', 'OS8A83M3DUAO');
