@@ -44,7 +44,11 @@
                     <input type="text" class="form-control" placeholder="http://cpk.msu.ru/files/2015/documents/concourse2_b.pdf" id="url_source">
                   </div><!-- /input-group -->
                 <br>
-                <p><textarea rows="25" cols="90" name="text" class="form-control" id="bigtext" autofocus></textarea></p>
+                <p><textarea rows="20" cols="90" name="text" class="form-control regex-example" id="bigtext" autofocus></textarea></p>
+                <script>
+                  function onInputRegex(input) {return /(([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s.{0,20}?([1-9][0-9]{1,2})[^0-9])|([^0-9](\b\d{2}\.\d{2}\.\d{2}\b)[^0-9])/g;}
+                  $("textarea.regex-example").highlightWithinTextarea(onInputRegex);
+                </script>
                 <div class="row">
                   <div class="col-md-5"><button type="button" class="btn btn-primary btn-lg" id="buttonforsource" href="#">Ввод</button></div>
                   <div class="col-md-7">'.$strabb.'</div>
@@ -116,15 +120,20 @@
     else {
       echo "<p>Data not available, bitch</p>";exit();
     }
+    for ($i=0; $i < $answer_students; $i++) {unset($db_students[$i][0]);}//Удаление мусора
     //print_r($db_students);
+    $injson = json_encode($db_students, JSON_UNESCAPED_UNICODE);
 
-    echo 'Сформулирована таблица из '.$count_students.' студентов
-    <table class="table table-striped"><thead><tr><th>#</th><th>surname</th><th>name</th><th>patronymic</th><th>sum</th><th>specialization</th></tr></thead><tbody>'."\n";
+    echo '<table class="table table-striped"><thead><tr><th>#</th><th>surname</th><th>name</th><th>patronymic</th><th>sum</th><th>specialization</th></tr></thead><tbody>'."\n";
         for($i=0; $i < $answer_students; $i++) {
           $nuka = $i + 1;
-          echo "<tr><td>".$nuka.'</td><td>'.$db_students[$i][1].'</td><td>'.$db_students[$i][2].'</td><td>'.$db_students[$i][3].'</td><td>'.$db_students[$i][4].'</td><td>'.$db_students[$i][5]."</td></tr>\n";
+          echo '<tr><td>'.$nuka.'</td><td>'.$db_students[$i][1].'</td><td>'.$db_students[$i][2].'</td><td>'.$db_students[$i][3].'</td><td>'.$db_students[$i][4].'</td><td>'.$db_students[$i][5]."</td></tr>\n";
         }
     echo "</tbody></table>\n";
+    echo '<input type="hidden" id="injson" '."value='".$injson."'>".'
+    <script type="text/javascript">
+alert($("#injson").val());
+</script>';
 
 	mysql_close($sqlconnect);
 ?>

@@ -17,12 +17,43 @@ echo '
 
     <title>Control Panel</title>
 
-
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link href="dashboard.css" rel="stylesheet">
+    <link href="/highlight-within-textarea-master/jquery.highlight-within-textarea.css" rel="stylesheet">
     <script src="/jquery-2.2.4.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
+    <script src="/highlight-within-textarea-master/jquery.highlight-within-textarea.js"></script>
     <script src="mine.js"></script>
+
+    <!-- make things pretty -->
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto+Mono);
+
+      /* background and positioning */
+      .hwt-container {
+        background-color: #fff;
+        height: auto;
+      }
+
+      /* size and formatting */
+      .hwt-content {
+        padding: 20px;
+        color: #555;
+        font: 18px/25px "Roboto Mono", sans-serif;
+      }
+
+      /* highlights */
+      .hwt-content mark {
+        border-radius: 3px;
+      }
+      .hwt-content mark:nth-of-type(2n) {
+        background-color: #cfdeab;
+      }
+      .hwt-content mark:nth-of-type(2n+1) {
+        background-color: #b1d5e5;
+      }
+    </style>
+
   </head>
 
 <body>
@@ -110,7 +141,11 @@ echo '
                     <input type="text" class="form-control" placeholder="http://cpk.msu.ru/files/2015/documents/concourse2_b.pdf" id="url_source">
                   </div><!-- /input-group -->
                 <br>
-                <p><textarea rows="25" cols="90" name="text" class="form-control" id="bigtext" autofocus></textarea></p>
+                <p><textarea rows="20" cols="90" name="text" class="form-control regex-example" id="bigtext" autofocus></textarea></p>
+                <script>
+                  function onInputRegex(input) {return /(([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s.{0,20}?([1-9][0-9]{1,2})[^0-9])|([^0-9](\b\d{2}\.\d{2}\.\d{2}\b)[^0-9])/g;}
+                  $("textarea.regex-example").highlightWithinTextarea(onInputRegex);
+                </script>
                 <div class="row">
                   <div class="col-md-5"><button type="button" class="btn btn-primary btn-lg" id="buttonforsource" href="#">Ввод</button></div>
                   <div class="col-md-7"></div>
