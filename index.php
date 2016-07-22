@@ -13,16 +13,32 @@ echo '
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
-    <title>Control Panel</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/favicons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>Open Students | Control Panel</title>
 
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <link href="dashboard.css" rel="stylesheet">
-    <link href="/highlight-within-textarea-master/jquery.highlight-within-textarea.css" rel="stylesheet">
-    <script src="/jquery-2.2.4.min.js"></script>
-    <script src="../../js/bootstrap.min.js"></script>
-    <script src="/highlight-within-textarea-master/jquery.highlight-within-textarea.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <link href="/js/highlight-within-textarea-master/jquery.highlight-within-textarea.css" rel="stylesheet">
+    <script src="/js/jquery-2.2.4.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/highlight-within-textarea-master/jquery.highlight-within-textarea.js"></script>
     <script src="mine.js"></script>
 
     <!-- make things pretty -->
@@ -67,9 +83,13 @@ echo '
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Ravengo</a>
+          <a class="navbar-brand" href="/">Open Students</a>
         </div>
+
         <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Control Panel</a></li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#" target="_blank">Search</a></li>
             <li><a href="https://bp.webhost1.ru/#hosting" target="_blank">MySQL</a></li>
