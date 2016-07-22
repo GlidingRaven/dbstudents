@@ -1,5 +1,4 @@
 <?php
-  //Функция на случай если пользователь "даст заднюю"
   function stepback($strabb){
     echo '<h1 class="page-header">Добавление сорса</h1>
                 <div class="row">
@@ -55,16 +54,12 @@
                 </div>
 ';}
 
-  if ($_COOKIE["passer"]<>"325373c671bd18c9c526be384516c5da") {
-    header("HTTP/1.1 403 Forbidden" );
-    exit();
-  }
 
   $sqlconnect = mysql_connect('localhost', 'rainadmin_exp', 'OS8A83M3DUAO');
   mysql_select_db('rainadmin_exp');
 
   $str = mysql_real_escape_string($_POST['bigtext']);
-  $str = preg_replace("/(Приказом\s)|(Минобрнауки\s)|(России\s)|(по\s)/u", "", $str);//Удаляем мусор
+  $str = preg_replace("/(Приказом\s)|(Минобрнауки\s)|(России\s)|(по\s)|(Особое\s)|(Бюджетная\s)|(основа\s)|(общих\s)|(право\s)|(основаниях\s)|(СПО\s)|(конкурсу\s)|(говно\s)/u", "", $str);//Удаляем мусор
   $name_uz = mysql_real_escape_string($_POST['name_uz']);
   $url_source = mysql_real_escape_string($_POST['url_source']);
   $date_day = intval($_POST['date_day']);
@@ -86,7 +81,7 @@
   $code_source = $max_of_code_source[0] + 1;
   $count_students = 0;
 
-  $re_spec = "/[^0-9](\\b\\d{2}\\.\\d{2}\\.\\d{2}\\b)[^0-9]/";
+  $re_spec = "/[^\d](\d{1,2}\.\d{2}\.\d{2})[^\d]/";
   $stud = file('regex.txt'); $re_stud = $stud[0];
     
    
@@ -111,18 +106,30 @@
       if ($answer_specialization >= 1) {
         for ($i=0; $i < $answer_specialization; $i++) {
           for ($k=0; $k < $answer_students; $k++) { 
-            if ($db_students[$k][0] > $matches_spec[0][$i][1]) {
-              $db_students[$k][5] = $matches_spec[0][$i][0];
+            if ($db_students[$k][0] > $matches_spec[1][$i][1]) {
+              $db_students[$k][5] = $matches_spec[1][$i][0];
             }
           }
         }}
     }
     else {
-      echo "<p>Data not available, bitch</p>";exit();
+      stepback("<kbd>Информация не доступна | Data not available, bitch</kbd>");exit();
     }
     for ($i=0; $i < $answer_students; $i++) {unset($db_students[$i][0]);}//Удаление мусора
     //print_r($db_students);
     $injson = json_encode($db_students, JSON_UNESCAPED_UNICODE);
+
+    $arrayforhelp["name_uz"] = $abb_name_UZ;
+    $arrayforhelp["url_source"] = $url_source;
+    $arrayforhelp["date_day"] = $date_day;
+    $arrayforhelp["date_month"] = $date_month;
+    $arrayforhelp["date_year"] = $date_year;
+    $arrayforhelp["count_students"] = $count_students;
+    $arrayforhelp["code_source"] = $code_source;
+    $arrayforhelp["code_UZ"] = $code_UZ;
+
+    $helpjson = json_encode($arrayforhelp, JSON_UNESCAPED_UNICODE);
+
 
     echo '<table class="table table-striped"><thead><tr><th>#</th><th>surname</th><th>name</th><th>patronymic</th><th>sum</th><th>specialization</th></tr></thead><tbody>'."\n";
         for($i=0; $i < $answer_students; $i++) {
@@ -130,10 +137,14 @@
           echo '<tr><td>'.$nuka.'</td><td>'.$db_students[$i][1].'</td><td>'.$db_students[$i][2].'</td><td>'.$db_students[$i][3].'</td><td>'.$db_students[$i][4].'</td><td>'.$db_students[$i][5]."</td></tr>\n";
         }
     echo "</tbody></table>\n";
-    echo '<input type="hidden" id="injson" '."value='".$injson."'>".'
+    echo '<input type="hidden" id="injson" '."value='".$injson."'>".'<input type="hidden" id="helpjson" '."value='".$helpjson."'>".'
     <script type="text/javascript">
-alert($("#injson").val());
+      //alert($("#helpjson").val());
 </script>';
+    echo '<div class="row">
+                  <div class="col-md-5"><a href="/forspec" class="btn btn-default">Назад</a></div>
+                  <div class="col-md-7"><button type="button" class="btn btn-primary btn-lg" id="buttonforfinalsource" href="#">Ввод</button></div>
+                </div>';
 
 	mysql_close($sqlconnect);
 ?>
