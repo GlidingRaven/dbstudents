@@ -1,6 +1,6 @@
 # dbstudents
 
-Каждый год в ВУЗы России поступают тысячи абитуриентов со всей страны. Каждый год 
+Каждый год в ВУЗы России поступают тысячи абитуриентов со всей страны. Каждый год появляются тысячи приказов о зачислении. Мною была представлена задача найти, обработать и использовать максимально эффективным образом эти ценные данные. В конечном итоге получилось кое-что интересное
 
 ### Схема ввода исходных данных
 
@@ -35,7 +35,7 @@ function onInput(input) {
 }
 ```
 
-##### Array
+##### Ar
 
 The function may also return an array of arrays. Each inner array specifies a span of highlighting and should have exactly 2 values: the starting character index (inclusive) and the ending character index (exclusive).
 

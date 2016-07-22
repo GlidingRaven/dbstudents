@@ -1,4 +1,5 @@
 $(document).on('click',"#buttonforsource", forsource);
+$(document).on("click","#buttonforfinalsource", forfinalsource);
 $(document).on('click',"#buttonforuz", foruz);
 $(document).on('click',"#buttonforcity", forcity);
 $(document).on('click',"#buttonregexp", forregexp);
@@ -17,6 +18,19 @@ function forsource(){
     window.scrollTo(0,0);
                          })
     .fail(function(data) {
+    alert("fail");
+  });
+  }
+
+function forfinalsource(){
+  var finalsource = $("#injson").val();
+  var finalhelp = $("#helpjson").val();
+  $.post("transformers/addersource.php", {finalsource: finalsource, finalhelp: finalhelp} )
+    .done(function(data) {
+      if(Number(data)==200){alert("ok");location.reload();}
+                else{alert("Eror");$("#source").html(data);}
+                          })
+    .fail(function() {
     alert("fail");
   });
   }
