@@ -77,6 +77,8 @@
   $abb_name_UZ = $report[abb_name_UZ];
   $code_UZ = $report[code_UZ];
 
+  $count_citys = mysql_fetch_array(mysql_query("SELECT * FROM `fatherland` WHERE `city_code` LIKE '$city_code'"));//Нахождение названия города
+  $city_name = $count_citys[city_name];
   $max_of_code_source = mysql_fetch_array(mysql_query("SELECT MAX(`code_source`) FROM `sources`"));//Нахождение макс. номера сорса
   $code_source = $max_of_code_source[0] + 1;
   $count_students = 0;
@@ -127,6 +129,8 @@
     $arrayforhelp["count_students"] = $count_students;
     $arrayforhelp["code_source"] = $code_source;
     $arrayforhelp["code_UZ"] = $code_UZ;
+    $arrayforhelp["city_name"] = $city_name;
+    $arrayforhelp["city_code"] = $city_code;
 
     $helpjson = json_encode($arrayforhelp, JSON_UNESCAPED_UNICODE);
 
