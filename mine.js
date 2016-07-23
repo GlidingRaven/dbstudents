@@ -3,6 +3,7 @@ $(document).on("click","#buttonforfinalsource", forfinalsource);
 $(document).on('click',"#buttonforuz", foruz);
 $(document).on('click',"#buttonforcity", forcity);
 $(document).on('click',"#buttonregexp", forregexp);
+$(document).on('click',"#buttonforback", forback);
 
 function forsource(){
   var bigtext = $('#bigtext').val();//Содержание сорса
@@ -14,6 +15,12 @@ function forsource(){
   
   $.post("transformers/preaddersource.php", { bigtext: bigtext, name_uz: name_uz, date_day: date_day, date_month: date_month, date_year: date_year, url_source: url_source } )
     .done(function(data) {//alert("Data Loaded: " + data);$("#bigtext").val("");$("#url_source").val("");
+    sessionStorage.nameuz = name_uz;
+    sessionStorage.dateday = date_day;
+    sessionStorage.datemonth = date_month;
+    sessionStorage.dateyear = date_year;
+    sessionStorage.url = url_source;
+    sessionStorage.bigtext = bigtext;
     $("#source").html(data);
     window.scrollTo(0,0);
                          })
@@ -76,6 +83,17 @@ function forregexp(){
                 else{alert("Eror: " + data);}
                           })
     .fail(function() {
+    alert("fail");
+  });
+  }
+
+function forback(){
+  $.post("transformers/preaddersource.php", { back: "100" } )
+    .done(function(data) {
+    $("#source").html(data);
+    window.scrollTo(0,0);
+                         })
+    .fail(function(data) {
     alert("fail");
   });
   }

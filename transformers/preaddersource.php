@@ -51,15 +51,25 @@
                 <div class="row">
                   <div class="col-md-5"><button type="button" class="btn btn-primary btn-lg" id="buttonforsource" href="#">Ввод</button></div>
                   <div class="col-md-7">'.$strabb.'</div>
-                </div>
-';}
-
+                </div>'."
+                <script>
+                  $('#bigtext').val(sessionStorage.bigtext);
+                  $('#name_uz').val(sessionStorage.nameuz);
+                  $('#url_source').val(sessionStorage.url);
+                  $('#date_day').val(sessionStorage.dateday);
+                  $('#date_month').val(sessionStorage.datemonth);
+                  $('#date_year').val(sessionStorage.dateyear);
+                </script>
+";}
+  
+  if (intval($_POST['back'])==100) {stepback("");exit();}
 
   $sqlconnect = mysql_connect('localhost', 'rainadmin_exp', 'OS8A83M3DUAO');
   mysql_select_db('rainadmin_exp');
 
   $str = mysql_real_escape_string($_POST['bigtext']);
-  $str = preg_replace("/(Приказом\s)|(Минобрнауки\s)|(России\s)|(По\s)|(На\s)|(Особое\s)|(Бюджетная\s)|(Основа\s)|(Общих\s)|(право\s)|(основаниях\s)|(СПО\s)|(конкурсу\s)|(Вне\s)|(конкурса\s)/u", "", $str);//Удаляем мусор
+  $str = preg_replace("/(Без экзаменов)/u", "555", $str);
+  $str = preg_replace("/(Приказом\s)|(Минобрнауки\s)|(России\s)|(По\s)|(На\s)|(Особое\s)|(Бюджетная\s)|(Основа\s)|(Общих\s)|(право\s)|(основаниях\s)|(СПО\s)|(конкурсу\s)|(Вне\s)|(Без\s)|(конкурса\s)/u", "", $str);//Удаляем мусор
   $name_uz = mysql_real_escape_string($_POST['name_uz']);
   $url_source = mysql_real_escape_string($_POST['url_source']);
   $date_day = intval($_POST['date_day']);
@@ -146,7 +156,7 @@
       //alert($("#helpjson").val());
 </script>';
     echo '<div class="row">
-                  <div class="col-md-5"><a href="/adm/index.php" class="btn btn-default">Назад</a></div>
+                  <div class="col-md-5"><a href="#" id="buttonforback" class="btn btn-default">Назад</a></div>
                   <div class="col-md-7"><button type="button" class="btn btn-primary btn-lg" id="buttonforfinalsource" href="#">Ввод</button></div>
                 </div>';
 
