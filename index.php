@@ -140,8 +140,8 @@ echo '
                   <div class="input-group">
                   <span class="input-group-addon" id="sizing-addon1">Месяц</span>
                   <select class="form-control"  id="date_month">
-                      <option value="7">июль</option>
-                      <option value="8">август</option>
+                      <option value="7">июль [7]</option>
+                      <option value="8">август [8]</option>
                   </select>
                   </div><!-- /input-group -->
                 </div><!-- /.col-lg-3 -->
@@ -201,12 +201,12 @@ echo '
                 <p><button type="button" class="btn btn-primary btn-lg" id="buttonforcity" href="#">Ввод</button></p>
             </div>
             <div role="tabpanel" class="tab-pane" id="reference">
-                <h1 class="page-header">Справка</h1>
-                <h3>Ошибки при добавлении УЗ</h3>
-                <p>400 - неполное заполнение или неверный формат</p>
-                <p>410 - такого города нет</p>
-                <p>420 - повторение сокращенного названия УЗ</p>
-                <p>430 - такого УЗ нет</p>
+                <h1 class="page-header">Справка (в помощь оператору)</h1>
+                <h3>Примечание</h3>
+                <p>Подсветка текста моделирует работу обработчика, не игнорируйте её</p>
+                <p>Для обозначения студентов, поступивших без экзаменов, используйте сумму баллов <b>555</b></p>
+                <p>При отсутствии отчества используйте слово <b>Анон</b></p>
+                <h3>Ошибки при добавлении</h3>
                 <p>fail - ошибка клиент-сервер</p>
             </div>
             

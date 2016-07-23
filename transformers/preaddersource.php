@@ -22,8 +22,8 @@
                   <div class="input-group">
                   <span class="input-group-addon" id="sizing-addon1">Месяц</span>
                   <select class="form-control"  id="date_month">
-                      <option value="7">июль</option>
-                      <option value="8">август</option>
+                      <option value="7">июль [7]</option>
+                      <option value="8">август [8]</option>
                   </select>
                   </div><!-- /input-group -->
                 </div><!-- /.col-lg-3 -->
@@ -59,7 +59,7 @@
   mysql_select_db('rainadmin_exp');
 
   $str = mysql_real_escape_string($_POST['bigtext']);
-  $str = preg_replace("/(Приказом\s)|(Минобрнауки\s)|(России\s)|(по\s)|(Особое\s)|(Бюджетная\s)|(основа\s)|(общих\s)|(право\s)|(основаниях\s)|(СПО\s)|(конкурсу\s)|(говно\s)/u", "", $str);//Удаляем мусор
+  $str = preg_replace("/(Приказом\s)|(Минобрнауки\s)|(России\s)|(По\s)|(На\s)|(Особое\s)|(Бюджетная\s)|(Основа\s)|(Общих\s)|(право\s)|(основаниях\s)|(СПО\s)|(конкурсу\s)|(Вне\s)|(конкурса\s)/u", "", $str);//Удаляем мусор
   $name_uz = mysql_real_escape_string($_POST['name_uz']);
   $url_source = mysql_real_escape_string($_POST['url_source']);
   $date_day = intval($_POST['date_day']);
@@ -146,7 +146,7 @@
       //alert($("#helpjson").val());
 </script>';
     echo '<div class="row">
-                  <div class="col-md-5"><a href="/forspec" class="btn btn-default">Назад</a></div>
+                  <div class="col-md-5"><a href="/adm/index.php" class="btn btn-default">Назад</a></div>
                   <div class="col-md-7"><button type="button" class="btn btn-primary btn-lg" id="buttonforfinalsource" href="#">Ввод</button></div>
                 </div>';
 
