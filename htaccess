@@ -1,2 +1,12 @@
+#/answerer/or.php?p=4  to  /or/4
+
+RewriteEngine On
+RewriteRule ^or/([^/]*)$ /answerer/or.php?number=$1 [L]
+
 #Убираем расширение файла из URL
+
 RewriteRule ^(([^/]+/)*[^.]+)$ /$1.php [L]
+
+
+ErrorDocument 403 /403.php
+ErrorDocument 404 /404.php
