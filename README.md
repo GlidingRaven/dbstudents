@@ -16,7 +16,8 @@
 
 dbstudents/
 ├── answerer/
-│   └── st.php 					(поиск по БД)
+│   ├── st.php 					(поиск по БД)
+│   └── or.php 					(информация о приказе)
 ├── transformers/
 │   ├── addercity.php 			(добавление города)
 │   ├── addersource.php 		(добавление приказа)

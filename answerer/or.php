@@ -91,6 +91,7 @@ echo '
 echo '
 	<h1>'.$city_name.' / '.$abb_name_UZ.' / Приказ №'.$number.' от '.$date.'</h1>
 	<h3>Приказ о зачислении '.$count_students.' '.getNumEnding($count_students, array('студента', 'студентов', 'студентов')).'</h3>
+	<h4 class="text-right"><a href="'.$link.'" target="_blank">Ссылка на источник</a></h4>
 	<table class="table table-striped">
       <thead><tr><th>#</th><th>Город</th><th>ВУЗ</th><th>Приказ</th><th>Фамилия</th><th>Имя</th><th>Отчёство</th><th>Сумма</th><th>Специальность</th></tr></thead>
       <tbody>';
