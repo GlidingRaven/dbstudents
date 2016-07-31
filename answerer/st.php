@@ -138,10 +138,10 @@ for($i=1;$i<=$count_found;$i++) {
         $arr = mysql_fetch_array($report);
         if ($arr[sum]==555) {$sum = "б/э";} else {$sum = $arr[sum];}//Правильный вывод суммы баллов
         echo "<tr><td>".$i.
-        '</td><td>'.$arr[city_name].
-        '</td><td>'.$arr[abb_name_UZ].
-        '</td><td><a href="/or/'.$arr[code_source].'">Приказ '.$arr[code_source].'</a>'.
-        '</td><td>'.$arr[surname].
+        '</td><td><a href="/ci/'.$arr[city_code].'">'.$arr[city_name].
+        '</a></td><td><a href="/uz/'.$arr[code_UZ].'">'.$arr[abb_name_UZ].
+        '</a></td><td><a href="/or/'.$arr[code_source].'">Приказ '.$arr[code_source].
+        '</a></td><td>'.$arr[surname].
         '</td><td>'.$arr[name].
         '</td><td>'.$arr[patronymic].
         '</td><td>'.$sum.

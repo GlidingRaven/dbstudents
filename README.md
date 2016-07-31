@@ -17,6 +17,7 @@
 dbstudents/
 ├── answerer/
 │   ├── st.php 					(поиск по БД)
+│   ├── uz.php 					(информация о ВУЗе)
 │   └── or.php 					(информация о приказе)
 ├── transformers/
 │   ├── addercity.php 			(добавление города)

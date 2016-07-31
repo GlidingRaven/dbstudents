@@ -52,14 +52,16 @@ $link = $report[link];
 $count_students = $report[count_students];
 
 $report = mysql_query("SELECT * FROM `students` WHERE `code_source` = ".$number);
-$first_student= mysql_fetch_array($report);
 
-if ($first_student == false) {
+if ($report == false) {
 	echo "This source does not exist [2]";
 	exit();
 }
 
+$first_student= mysql_fetch_array($report);
 $city_name = $first_student[city_name];
+$city_code = $first_student[city_code];
+$code_UZ = $first_student[code_UZ];
 
 $surname = $first_student[surname];
 $name = $first_student[name];
@@ -76,8 +78,8 @@ $title = preg_replace('/\s/u','%20',$title);$description = preg_replace('/\s/u',
 echo '
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-          	<li><a href="#">'.$city_name.'</a></li>
-          	<li><a href="#">'.$abb_name_UZ.'</a></li>
+          	<li><a href="/ci/'.$city_code.'">'.$city_name.'</a></li>
+          	<li><a href="/uz/'.$code_UZ.'">'.$abb_name_UZ.'</a></li>
             <li class="active"><a href="#">Приказ №'.$number.'</a></li>
           </ul>
         </div>
@@ -117,5 +119,7 @@ echo '</tbody>
 
 $a=file_get_contents("http://openstudents.ru/templates/footer.php");
 echo ($a);
+
+mysql_close($sqlconnect);
 
 ?>

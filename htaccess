@@ -2,6 +2,8 @@
 
 RewriteEngine On
 RewriteRule ^or/([^/]*)$ /answerer/or.php?number=$1 [L]
+RewriteRule ^uz/([^/]*)$ /answerer/uz.php?number=$1 [L]
+RewriteRule ^ci/([^/]*)$ /answerer/ci.php?number=$1 [L]
 
 #Убираем расширение файла из URL
 
