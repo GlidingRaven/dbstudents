@@ -1,9 +1,3 @@
-<?php
-if ($_COOKIE["passer"]<>"325373c671bd18c9c526be384516c5da") {
-  header("HTTP/1.1 403 Forbidden");
-  exit();
-}
-echo '
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -225,5 +219,4 @@ echo '
       </div>
     </div>
   </body>
-</html>';
-?>
+</html>
