@@ -5,6 +5,9 @@ RewriteRule ^or/([^/]*)$ /answerer/or.php?number=$1 [L]
 RewriteRule ^uz/([^/]*)$ /answerer/uz.php?number=$1 [L]
 RewriteRule ^ci/([^/]*)$ /answerer/ci.php?number=$1 [L]
 
+RewriteRule ^citys$ /answerer/citys.php [L]
+RewriteRule ^campuses$ /answerer/campuses.php [L]
+
 #Убираем расширение файла из URL
 
 RewriteRule ^(([^/]+/)*[^.]+)$ /$1.php [L]

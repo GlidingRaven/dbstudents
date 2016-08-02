@@ -49,9 +49,6 @@ $city_code = $report[city_code];
 $count_UZ = $report[count_UZ];
 $count_students = $report[count_students];
 
-//$city = mysql_fetch_array(mysql_query("SELECT * FROM `fatherland` WHERE `city_code` LIKE '$city_code'"));//Нахождение названия города
-//$city_name = $city[city_name];
-
 $report = mysql_query("SELECT * FROM `campuses` WHERE `city_code` = ".$city_code);
 
 if ($report == false) {
