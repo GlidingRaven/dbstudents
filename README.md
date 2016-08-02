@@ -14,19 +14,19 @@
 
 ### Структура
 
-dbstudents/
-├── answerer/
-│   ├── ci.php 					(информация о городе)
-│   ├── or.php 					(информация о приказе)
-│   ├── st.php 					(поиск по БД)
-│   └── uz.php 					(информация о ВУЗе)
-├── transformers/
-│   ├── addercity.php 			(добавление города)
-│   ├── addersource.php 		(добавление приказа)
-│   ├── adderuz.php 			(добавление ВУЗа)
-│   ├── preaddersource.php 		(предосмотр добавления приказа)
-│   └── regexper.php 			(изменение регулярного выражения)
-├── README.md
-├── htaccess
-├── index.php 					(панель оператора)
-└── mine.js   					(js для панели)
+> dbstudents/
+> ├── answerer/
+> │   ├── ci.php 					(информация о городе)
+> │   ├── or.php 					(информация о приказе)
+> │   ├── st.php 					(поиск по БД)
+> │   └── uz.php 					(информация о ВУЗе)
+> ├── transformers/
+> │   ├── addercity.php 			(добавление города)
+> │   ├── addersource.php 		(добавление приказа)
+> │   ├── adderuz.php 			(добавление ВУЗа)
+> │   ├── preaddersource.php 		(предосмотр добавления приказа)
+> │   └── regexper.php 			(изменение регулярного выражения)
+> ├── README.md
+> ├── htaccess
+> ├── index.php 					(панель оператора)
+> └── mine.js   					(js для панели)
