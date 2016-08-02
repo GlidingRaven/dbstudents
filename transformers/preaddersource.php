@@ -31,8 +31,8 @@
                   <div class="input-group">
                   <span class="input-group-addon" id="sizing-addon1">Год</span>
                   <select class="form-control"  id="date_year">
-                      <option value="2015">2015</option>
                       <option value="2016">2016</option>
+                      <option value="2015">2015</option>
                   </select>
                   </div><!-- /input-group -->
                 </div><!-- /.col-lg-2 -->
@@ -41,6 +41,11 @@
                   <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon1">Ссылка на источник</span>
                     <input type="text" class="form-control" placeholder="http://cpk.msu.ru/files/2015/documents/concourse2_b.pdf" id="url_source">
+                  </div><!-- /input-group -->
+                <br>
+                  <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon1">Описание приказа</span>
+                    <input type="text" class="form-control" id="comment">
                   </div><!-- /input-group -->
                 <br>
                 <p><textarea rows="20" cols="90" name="text" class="form-control regex-example" id="bigtext" autofocus></textarea></p>
@@ -59,6 +64,7 @@
                   $('#date_day').val(sessionStorage.dateday);
                   $('#date_month').val(sessionStorage.datemonth);
                   $('#date_year').val(sessionStorage.dateyear);
+                  $('#comment').val(sessionStorage.comment);
                 </script>
 ";}
   
@@ -69,12 +75,13 @@
 
   $str = mysql_real_escape_string($_POST['bigtext']);
   $str = preg_replace("/(призеры олимпиад)|(Без экзаменов)/u", "555", $str);
-  $str = preg_replace("/(Приказом\s)|(Минобрнауки\s)|(России\s)|(По\s)|(На\s)|(Особое\s)|(Бюджетная\s)|(Основа\s)|(Общих\s)|(право\s)|(основаниях\s)|(СПО\s)|(конкурсу\s)|(Вне\s)|(Без\s)|(конкурса\s)/u", "", $str);//Удаляем мусор
+  $str = preg_replace("/(Приказом\s)|(Минобрнауки\s)|(России\s)|(Администрация)|(Министерство)|(По\s)|(Республик)|(Правительство)|(На\s)|(Особое\s)|(Бюджетная\s)|(Основа\s)|(Общих\s)|(право\s)|(основаниях\s)|(СПО\s)|(конкурсу\s)|(Вне\s)|(Без\s)|(конкурса\s)/u", "", $str);//Удаляем мусор
   $name_uz = mysql_real_escape_string($_POST['name_uz']);
   $url_source = mysql_real_escape_string($_POST['url_source']);
   $date_day = intval($_POST['date_day']);
   $date_month = intval($_POST['date_month']);
   $date_year = intval($_POST['date_year']);
+  $comment = mysql_real_escape_string($_POST['comment']);
 
   if ((strlen($str)==0)or(strlen($name_uz)==0)or(strlen($url_source)==0)or($date_day<1)or($date_day>31)or($date_month<1)or($date_month>12)or($date_year<2015)or($date_year>2020))
   {stepback("<kbd>Неполное заполнение или неверный формат</kbd>");exit();}//Всё ли есть?
@@ -141,6 +148,7 @@
     $arrayforhelp["code_UZ"] = $code_UZ;
     $arrayforhelp["city_name"] = $city_name;
     $arrayforhelp["city_code"] = $city_code;
+    $arrayforhelp["comment"] = $comment;
 
     $helpjson = json_encode($arrayforhelp, JSON_UNESCAPED_UNICODE);
 

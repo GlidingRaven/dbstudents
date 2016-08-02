@@ -50,6 +50,7 @@ $code_UZ = $report[code_UZ];
 $abb_name_UZ = $report[abb_name_UZ];
 $link = $report[link];
 $count_students = $report[count_students];
+$comment = $report[comment];
 
 $report = mysql_query("SELECT * FROM `students` WHERE `code_source` = ".$number);
 
@@ -92,6 +93,7 @@ echo '
 
 echo '
 	<h1>'.$city_name.' / '.$abb_name_UZ.' / Приказ №'.$number.' от '.$date.'</h1>
+  <h2>'.$comment.'</h2>
 	<h3>Приказ о зачислении '.$count_students.' '.getNumEnding($count_students, array('студента', 'студентов', 'студентов')).'</h3>
 	<h4 class="text-right"><a href="'.$link.'" target="_blank">Ссылка на источник</a></h4>
 	<table class="table table-striped">
@@ -99,7 +101,7 @@ echo '
       <tbody>';
 echo '<tr><td>1</td><td>'.$city_name.'</td><td>'.$abb_name_UZ.'</td><td>Приказ '.$number.'</td><td>'.$surname.'</td><td>'.$name.'</td><td>'.$patronymic.'</td><td>'.$sum.'</td><td>'.$specialization.'</td></tr>';
 
-for($i=2;$i<=$count_students-1;$i++) {
+for($i=2;$i<=$count_students;$i++) {
         $arr = mysql_fetch_array($report);
         if ($arr[sum]==555) {$sum = "б/э";} else {$sum = $arr[sum];}//Правильный вывод суммы баллов
         echo "<tr><td>".$i.

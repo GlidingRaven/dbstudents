@@ -12,8 +12,9 @@ function forsource(){
   var date_day = $('#date_day').val();
   var date_month = $('#date_month').val();
   var date_year = $('#date_year').val();
+  var comment = $('#comment').val();
   
-  $.post("transformers/preaddersource.php", { bigtext: bigtext, name_uz: name_uz, date_day: date_day, date_month: date_month, date_year: date_year, url_source: url_source } )
+  $.post("transformers/preaddersource.php", { bigtext: bigtext, name_uz: name_uz, date_day: date_day, date_month: date_month, date_year: date_year, url_source: url_source, comment: comment } )
     .done(function(data) {//alert("Data Loaded: " + data);$("#bigtext").val("");$("#url_source").val("");
     sessionStorage.nameuz = name_uz;
     sessionStorage.dateday = date_day;
@@ -21,6 +22,7 @@ function forsource(){
     sessionStorage.dateyear = date_year;
     sessionStorage.url = url_source;
     sessionStorage.bigtext = bigtext;
+    sessionStorage.comment = comment;
     $("#source").html(data);
     window.scrollTo(0,0);
                          })

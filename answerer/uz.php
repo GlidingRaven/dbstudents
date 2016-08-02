@@ -92,7 +92,7 @@ echo '
 if ($count_sources <> 0) {
     echo '
         <table class="table table-striped">
-          <thead><tr><th>#</th><th>Номер</th><th>Дата</th><th>Зачислено студентов</th></thead>
+          <thead><tr><th>#</th><th>Номер</th><th>Дата</th><th>Зачислено студентов</th><th>Описание</th></thead>
           <tbody>';
 
     for($i=1;$i<=$count_sources;$i++) {
@@ -101,6 +101,7 @@ if ($count_sources <> 0) {
             '</td><td><a href="/or/'.$arr[code_source].'">'.$arr[code_source].
             '</a></td><td>'.$arr[date].
             '</td><td>'.$arr[count_students].
+            '</td><td>'.$arr[comment].
             '</td></tr>';
           }
     echo '</tbody>
