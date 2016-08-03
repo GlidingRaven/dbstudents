@@ -25,10 +25,13 @@
 	$max_of_code_uz = mysql_fetch_array(mysql_query("SELECT MAX(`code_UZ`) FROM `campuses`"));//Нахождение макс. номера
 
 	$code_uz = $max_of_code_uz[0] + 1;
-	mysql_query("UPDATE `fatherland` SET count_UZ = count_UZ + 1 WHERE city_code = $city_code");
-	mysql_query("INSERT INTO `campuses` (`city_code`, `full_name_UZ`, `abb_name_UZ`, `code_UZ`, `count_sources`, `url_site`) VALUES ('$city_code', '$full_name_uz', '$abb_name_uz', '$code_uz', 0, '$url_site')");
+	$ex = mysql_query("UPDATE `fatherland` SET count_UZ = count_UZ + 1 WHERE city_code = $city_code");
 
 	if ($ex==false) {echo "1st eror";exit();}
+
+	$ex = mysql_query("INSERT INTO `campuses` (`city_code`, `full_name_UZ`, `abb_name_UZ`, `code_UZ`, `count_sources`, `url_site`) VALUES ('$city_code', '$full_name_uz', '$abb_name_uz', '$code_uz', 0, '$url_site')");
+
+	if ($ex==false) {echo "2st eror";exit();}
 
 	echo "200";
 
