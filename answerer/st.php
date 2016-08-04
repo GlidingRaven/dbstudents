@@ -85,6 +85,14 @@ if (strlen($specialization)>0) {
 	$count_input_data++;
 }
 
+if (strlen($from)>0) {
+    $count_input_data++;
+}
+
+if (strlen($to)>0) {
+    $count_input_data++;
+}
+
 //Блок логики поиска баллов между/больше/меньше заданных значений
 if ((strlen($from)>0)and(strlen($to)>0)) {
 	if (strlen($sqlending)>0) {$sqlending .= " AND";}
@@ -119,6 +127,8 @@ $count_found = $report[0];
 
 if ($count_found == 0) { echo "По данному запросу ничего не найдено"; exit(); }
 
+if ($count_found > 1500) { echo "Количество результатов больше 1500. Уточните запрос"; exit(); }
+
 $a=file_get_contents("http://openstudents.ru/templates/search.php");
 echo ($a);
 
@@ -150,6 +160,19 @@ for($i=1;$i<=$count_found;$i++) {
       }
 echo '</tbody>
     </table>';
+
+echo '
+        <div style="text-align: center;">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- OpenSt footer -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-8212627326962960"
+             data-ad-slot="2795091539"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        </div>';
 
 
 mysql_close($sqlconnect);
