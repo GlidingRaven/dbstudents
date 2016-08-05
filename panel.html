@@ -33,7 +33,7 @@
     <script src="/js/jquery-2.2.4.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/highlight-within-textarea-master/jquery.highlight-within-textarea.js"></script>
-    <script src="mine.js"></script>
+    <script src="/adm/mine.js"></script>
 
     <!-- make things pretty -->
     <style>
@@ -105,6 +105,7 @@
           <ul class="nav nav-sidebar">
             <li><a href="/citys" target="_blank">Города</a></li>
             <li><a href="/campuses" target="_blank">ВУЗы</a></li>
+            <li><a href="transformers/cancelpanel.php" target="_blank">Откат БД <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -161,7 +162,7 @@
                 <br>
                 <p><textarea rows="20" cols="90" name="text" class="form-control regex-example" id="bigtext" autofocus></textarea></p>
                 <script>
-                  function onInputRegex(input) {return /(([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+).{0,20}?([1-9][0-9]{1,2})[^0-9])|([^0-9](\b\d{2}\.\d{2}\.\d{2}\b)[^0-9])/g;}
+                  function onInputRegex(input) {return /(([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)[\d\n]{0,20}(^[1-9][0-9]{2}$))|([^0-9](\b\d{2}\.\d{2}\.\d{2}\b)[^0-9])/gm;}
                   $("textarea.regex-example").highlightWithinTextarea(onInputRegex);
                 </script>
                 <div class="row">
@@ -213,7 +214,7 @@
                 <p><a href="#source" class="btn btn-primary" aria-controls="source" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a></p>
                 <div class="input-group">
                   <span class="input-group-addon" id="basic-addon1">Выражение</span>
-                  <input type="text" class="form-control" value="([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s.{0,20}?([1-9][0-9]{1,2})[^0-9]" id="regular_exp">
+                  <input type="text" class="form-control" value="([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s.{0,20}?[^0-9]([1-9][0-9]{2})[^0-9]" id="regular_exp">
                 </div><br>
                 <p><button type="button" class="btn btn-primary btn-lg" id="buttonregexp" href="#">Ввод</button></p>
             </div>

@@ -16,7 +16,7 @@
     $city_code = $finalhelp["city_code"];
     $comment = $finalhelp["comment"];
     
-    if ((strlen($city_code)==0)or(strlen($city_name)==0)or(strlen($code_source)==0)or(strlen($code_uz)==0)or(strlen($name_uz)==0)or(strlen($url_source)==0)or(strlen($date_day)==0)or(strlen($date_month)==0)or(strlen($date_year)==0)or(strlen($count_students)==0)or($date_day<1)or($date_day>31)or($date_month<1)or($date_month>12)or($date_year<2015)or($date_year>2020)or(strlen($comment)>=150)){echo "Не всё! Как ты смог сделать такую ошибку?";exit();}
+    if ((strlen($city_code)==0)or(strlen($city_name)==0)or(strlen($code_source)==0)or(strlen($code_uz)==0)or(strlen($name_uz)==0)or(strlen($url_source)==0)or(strlen($date_day)==0)or(strlen($date_month)==0)or(strlen($date_year)==0)or(strlen($count_students)==0)or($date_day<1)or($date_day>31)or($date_month<1)or($date_month>12)or($date_year<2015)or($date_year>2020)or(strlen($comment)>=200)){echo "Не всё! Как ты смог сделать такую ошибку?";exit();}
 
     if(count($finalsource)<>$count_students){echo "Число заявленных студентов не равно числу переданных в массиве.";exit();}
 	//print_r($finalsource);

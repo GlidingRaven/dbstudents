@@ -10,7 +10,7 @@
 	//$needle = '\\';
 	//$replace = '\\\\';
 	//$regex = str_replace($needle, $replace, $regex);
-	$regex = "/".$regex ."/u";
+	$regex = "/".$regex ."/ums";
 
 	$fp = fopen('regex.txt', "w");
 	fwrite($fp, $regex);

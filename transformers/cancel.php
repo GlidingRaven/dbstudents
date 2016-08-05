@@ -1,0 +1,67 @@
+<?php
+	if ($_COOKIE["passer"] <> "325373c671bd18c9c526be384516c5da") { echo ("403 Forbidden"); exit(); }
+
+	$del_number = $_POST['del_number'];
+	$del_number = preg_replace('/[^\d]/um', "", $del_number);
+
+	$del_pass = $_POST['del_pass'];
+	$del_pass = preg_replace('/[^A-Za-z\d]/um', "", $del_pass);
+
+    if ((strlen($del_number)==0)or(strlen($del_pass)==0)){echo "Введены не все поля";exit();}
+
+    if (($del_number<=0)or($del_number>2000)) {echo "Номер приказа неправильный";exit();}
+
+    if ($del_pass <> "yanefashist") {echo "Доступ запрещён";exit();}
+
+    $sqlconnect = mysql_connect('localhost', 'rainadmin_exp', 'OS8A83M3DUAO');
+    mysql_select_db('rainadmin_exp');
+
+    //DELETE FROM `students` WHERE `code_source` = $del_number
+    //DELETE FROM `sources` WHERE `code_source` = $del_number
+    //
+    $ex = mysql_query("SELECT * FROM `sources` WHERE `code_source` = $del_number");//Находим такой приказ
+    if ($ex == false) {echo "SQL ошибка";exit();}
+    $rez = mysql_fetch_array($ex);
+    if ($rez == 0) {echo "Такого приказа нет";exit();}
+	$count = mysql_num_rows($ex);
+	if ($count <> 1) {echo "Найдено несколько подобных приказов. Запрос брошен. Проверь БД.";exit();}
+	$count_students = $rez[count_students];
+	$code_uz = $rez[code_UZ];
+	if ($count_students == 0) {echo "Данные недоступны!";exit();}
+
+
+	$ex = mysql_query("SELECT * FROM `campuses` WHERE `code_UZ` LIKE '$code_uz'");
+	if ($ex == false) {echo "Ошибка SQL при попытке нахождения города";exit();}
+	$ex = mysql_fetch_array($ex);
+	$city_code = $ex[city_code];
+
+
+	$ex = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM `students` WHERE `code_source` = $del_number"));
+	$count_searched = $ex[0];
+	if ($count_searched <> $count_students) {echo "Количество студентов в базе не равно количеству заявленных в приказе! Запрос сброшен.";exit();}
+
+//////////////////////////////////// Ниже начинается "боевой" блок удаления/обновления БД
+
+	$ex = mysql_query("DELETE FROM `students` WHERE `code_source` = $del_number");//Удаляем студентов
+	if ($ex == false) {echo "Ошибка SQL при попытке удаления студентов. Проверь БД";exit();}
+
+	$ex = mysql_query("DELETE FROM `sources` WHERE `code_source` = $del_number");//Трём приказ
+	if ($ex == false) {echo "Ошибка SQL при попытке удаления приказа. Проверь БД";exit();}
+
+
+
+
+	$ex = mysql_query("UPDATE `campuses` SET count_sources = count_sources - 1 WHERE code_UZ = $code_uz");
+	if ($ex==false) {echo "Ошибка SQL при попытке обновления счётчика сорсов (в таблице ВУЗов)";exit();}
+
+	$ex = mysql_query("UPDATE `campuses` SET count_students = count_students - $count_students WHERE code_UZ = $code_uz");
+	if ($ex==false) {echo "Ошибка SQL при попытке обновления счётчика студентов (в таблице ВУЗов)";exit();}
+
+	$ex = mysql_query("UPDATE `fatherland` SET count_students = count_students - $count_students WHERE city_code = $city_code");
+	if ($ex==false) {echo "Ошибка SQL при попытке обновления счётчика студентов (в таблице городов)";exit();}
+
+
+
+	echo "Приказ №$del_number удалён";
+
+?>

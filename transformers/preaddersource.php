@@ -50,7 +50,7 @@
                 <br>
                 <p><textarea rows="20" cols="90" name="text" class="form-control regex-example" id="bigtext" autofocus></textarea></p>
                 <script>
-                  function onInputRegex(input) {return /(([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+).{0,20}?([1-9][0-9]{1,2})[^0-9])|([^0-9](\b\d{2}\.\d{2}\.\d{2}\b)[^0-9])/g;}
+                  function onInputRegex(input) {return /(([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)[\d\n]{0,20}(^[1-9][0-9]{2}$))|([^0-9](\b\d{2}\.\d{2}\.\d{2}\b)[^0-9])/gm;}
                   $("textarea.regex-example").highlightWithinTextarea(onInputRegex);
                 </script>
                 <div class="row">
@@ -73,7 +73,8 @@
   $sqlconnect = mysql_connect('localhost', 'rainadmin_exp', 'OS8A83M3DUAO');
   mysql_select_db('rainadmin_exp');
 
-  $str = mysql_real_escape_string($_POST['bigtext']);
+  $str = $_POST['bigtext'];
+  $str = preg_replace('/[^А-ЯЁа-яё\d\s\n\.]/um', "", $str);
   $str = preg_replace("/(призеры олимпиад)|(Без экзаменов)/u", "555", $str);
   $str = preg_replace("/(Приказом\s)|(Минобрнауки\s)|(России\s)|(Администрация)|(Министерство)|(По\s)|(Республик)|(Правительство)|(На\s)|(Особое\s)|(Бюджетная\s)|(Основа\s)|(Общих\s)|(право\s)|(основаниях\s)|(СПО\s)|(конкурсу\s)|(Вне\s)|(Без\s)|(конкурса\s)/u", "", $str);//Удаляем мусор
   $name_uz = mysql_real_escape_string($_POST['name_uz']);
