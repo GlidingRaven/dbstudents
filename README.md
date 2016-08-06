@@ -33,6 +33,8 @@ transformers/
 	cancelpanel.php 		(панель удаления приказа)
 	cancel.php 				(исполнительный файл удаления)
 
+others
+
 	README.md
 	htaccess
 	index.php 					(панель оператора)
