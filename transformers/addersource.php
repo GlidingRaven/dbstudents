@@ -1,25 +1,32 @@
 <?php
-	if ($_COOKIE["passer"] <> "325373c671bd18c9c526be384516c5da") { echo ("403 Forbidden"); exit(); }
 
-	$finalsource = json_decode($_POST['finalsource'], true);
-	$finalhelp = json_decode($_POST['finalhelp'], true);
+	////Единый блок авторизации
+	$password = preg_replace("/[^A-Za-z\d]/u", "", $_COOKIE["pass"]); // Берём куки и фильтруем
+	$hash1 = md5($password);			// Хешируем
+	$salt = 'sjkGbLklJa1sLkpN';			// Соль
+	$saltedHash = md5($hash1 . $salt);	// Складываем старый хеш с солью и пропускаем через функцию md5()
+	if ($saltedHash <> '56e1a81b86f358933a1ba6af32f57c86') {	echo "Access Denited.";exit();	}
 
-	$date_day = $finalhelp["date_day"];
-    $date_month = $finalhelp["date_month"];
-    $date_year = $finalhelp["date_year"];
-    $code_source = $finalhelp["code_source"];
-    $code_uz = $finalhelp["code_UZ"];
-	$name_uz = $finalhelp["name_uz"];
-    $url_source = $finalhelp["url_source"];
-    $count_students = $finalhelp["count_students"];
-    $city_name = $finalhelp["city_name"];
-    $city_code = $finalhelp["city_code"];
-    $comment = $finalhelp["comment"];
+
+	$finalsource =	json_decode($_POST['finalsource'], true);
+	$finalhelp =	json_decode($_POST['finalhelp'], true);
+
+	$date_day =			$finalhelp["date_day"];
+    $date_month =		$finalhelp["date_month"];
+    $date_year =		$finalhelp["date_year"];
+    $code_source =		$finalhelp["code_source"];
+    $code_uz =			$finalhelp["code_UZ"];
+	$name_uz =			$finalhelp["name_uz"];
+    $url_source =		$finalhelp["url_source"];
+    $count_students = 	$finalhelp["count_students"];
+    $city_name = 		$finalhelp["city_name"];
+    $city_code = 		$finalhelp["city_code"];
+    $comment = 			$finalhelp["comment"];
     
     if ((strlen($city_code)==0)or(strlen($city_name)==0)or(strlen($code_source)==0)or(strlen($code_uz)==0)or(strlen($name_uz)==0)or(strlen($url_source)==0)or(strlen($date_day)==0)or(strlen($date_month)==0)or(strlen($date_year)==0)or(strlen($count_students)==0)or($date_day<1)or($date_day>31)or($date_month<1)or($date_month>12)or($date_year<2015)or($date_year>2020)or(strlen($comment)>=200)){echo "Не всё! Как ты смог сделать такую ошибку?";exit();}
 
     if(count($finalsource)<>$count_students){echo "Число заявленных студентов не равно числу переданных в массиве.";exit();}
-	//print_r($finalsource);
+
 
     $sqlconnect = mysql_connect('localhost', 'rainadmin_exp', 'OS8A83M3DUAO');
     mysql_select_db('rainadmin_exp');

@@ -50,7 +50,7 @@
                 <br>
                 <p><textarea rows="20" cols="90" name="text" class="form-control regex-example" id="bigtext" autofocus></textarea></p>
                 <script>
-                  function onInputRegex(input) {return /(([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)[\d\n]{0,20}(^[1-9][0-9]{2}$))|([^0-9](\b\d{2}\.\d{2}\.\d{2}\b)[^0-9])/gm;}
+                  function onInputRegex(input) {return /(([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+).{0,20}?[^0-9]([1-9][0-9]{2})[^0-9])|([^0-9](\b\d{2}\.\d{2}\.\d{2}\b)[^0-9])/g;}
                   $("textarea.regex-example").highlightWithinTextarea(onInputRegex);
                 </script>
                 <div class="row">
@@ -77,12 +77,12 @@
   $str = preg_replace('/[^А-ЯЁа-яё\d\s\n\.]/um', "", $str);
   $str = preg_replace("/(призеры олимпиад)|(Без экзаменов)/u", "555", $str);
   $str = preg_replace("/(Приказом\s)|(Минобрнауки\s)|(России\s)|(Администрация)|(Министерство)|(По\s)|(Республик)|(Правительство)|(На\s)|(Особое\s)|(Бюджетная\s)|(Основа\s)|(Общих\s)|(право\s)|(основаниях\s)|(СПО\s)|(конкурсу\s)|(Вне\s)|(Без\s)|(конкурса\s)/u", "", $str);//Удаляем мусор
-  $name_uz = mysql_real_escape_string($_POST['name_uz']);
+  $name_uz =    mysql_real_escape_string($_POST['name_uz']);
   $url_source = mysql_real_escape_string($_POST['url_source']);
-  $date_day = intval($_POST['date_day']);
+  $date_day =   intval($_POST['date_day']);
   $date_month = intval($_POST['date_month']);
-  $date_year = intval($_POST['date_year']);
-  $comment = mysql_real_escape_string($_POST['comment']);
+  $date_year =  intval($_POST['date_year']);
+  $comment =    mysql_real_escape_string($_POST['comment']);
 
   if ((strlen($str)==0)or(strlen($name_uz)==0)or(strlen($url_source)==0)or($date_day<1)or($date_day>31)or($date_month<1)or($date_month>12)or($date_year<2015)or($date_year>2020))
   {stepback("<kbd>Неполное заполнение или неверный формат</kbd>");exit();}//Всё ли есть?

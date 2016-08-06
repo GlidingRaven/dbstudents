@@ -41,7 +41,7 @@ $surname = preg_replace("/[^А-Яа-яЁё]/u", "", $surname);
 $name = preg_replace("/[^А-Яа-яЁё]/u", "", $name);
 $patronymic = preg_replace("/[^А-Яа-яЁё]/u", "", $patronymic);
 $city = preg_replace("/[^А-Яа-яЁё]/u", "", $city);
-if ($city == "СанктПетербург") {$city = "Санкт-Петербург";}
+if (($city == "СанктПетербург")or($city == "Санктпетербург")or($city == "санктПетербург")or($city == "санктпетербург")) {$city = "Санкт-Петербург";}
 $vuz = preg_replace("/[^А-Яа-яЁё]/u", "", $vuz);
 $specialization = preg_replace("/[^\d\.]/u", "", $specialization);
 $from = preg_replace("/[^\d]/u", "", $from);
