@@ -7,11 +7,17 @@ RewriteRule ^ci/([^/]*)$ /answerer/ci.php?number=$1 [L]
 
 RewriteRule ^citys$ /answerer/citys.php [L]
 RewriteRule ^campuses$ /answerer/campuses.php [L]
+RewriteRule ^adm/panel$ /adm/panel.html [L]
 
 #Убираем расширение файла из URL
 
 RewriteRule ^(([^/]+/)*[^.]+)$ /$1.php [L]
 
+#Защищаем ini файлы
+<FilesMatch "\.(ini)$">
+Order allow,deny
+Deny from all
+</FilesMatch>
 
 ErrorDocument 403 /403.php
 ErrorDocument 404 /404.php

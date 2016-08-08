@@ -37,5 +37,5 @@ others
 
 	README.md
 	htaccess
-	index.php 					(панель оператора)
-	mine.js   					(js для панели)
+	index.php 				(панель оператора)
+	mine.js   				(js для панели)

@@ -70,8 +70,11 @@
   
   if (intval($_POST['back'])==100) {stepback("");exit();}
 
-  $sqlconnect = mysql_connect('localhost', 'rainadmin_exp', 'OS8A83M3DUAO');
-  mysql_select_db('rainadmin_exp');
+  $config = parse_ini_file("/home/rainadmin/openstudents.ru/config.ini");
+
+  $sqlconnect = mysql_connect($config[user], $config[database], $config[password]);
+  if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
+  mysql_select_db($config[database]);
 
   $str = $_POST['bigtext'];
   $str = preg_replace('/[^А-ЯЁа-яё\d\s\n\.]/um', "", $str);

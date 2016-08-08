@@ -1,9 +1,11 @@
 <?php
 
+	$config = parse_ini_file("/home/rainadmin/openstudents.ru/config.ini");
+
 	////Единый блок авторизации
 	$password = preg_replace("/[^A-Za-z\d]/u", "", $_COOKIE["pass"]); // Берём куки и фильтруем
 	$hash1 = md5($password);			// Хешируем
-	$salt = 'sjkGbLklJa1sLkpN';			// Соль
+	$salt = $config[salt];				// Соль
 	$saltedHash = md5($hash1 . $salt);	// Складываем старый хеш с солью и пропускаем через функцию md5()
 	if ($saltedHash <> '56e1a81b86f358933a1ba6af32f57c86') {	echo "Access Denited.";exit();	}
 
@@ -20,13 +22,14 @@
 	////Дублирующий блок аутентификации
 	$password = preg_replace("/[^A-Za-z\d]/u", "", $_POST['del_pass']); // Берём куки и фильтруем
 	$hash1 = md5($password);			// Хешируем
-	$salt = 'XyLOMAHCDMJvsTFr';			// Соль
+	$salt = $config[salt_cancel];		// Соль
 	$saltedHash = md5($hash1 . $salt);	// Складываем старый хеш с солью и пропускаем через функцию md5()
 	if ($saltedHash <> 'ce2bf0fac2983705f2a13d092079f800') {	echo "Пароль неверен";exit();	}
 
 
-    $sqlconnect = mysql_connect('localhost', 'rainadmin_exp', 'OS8A83M3DUAO');
-    mysql_select_db('rainadmin_exp');
+    $sqlconnect = mysql_connect($config[user], $config[database], $config[password]);
+    if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
+    mysql_select_db($config[database]);
 
     $ex = mysql_query("SELECT * FROM `sources` WHERE `code_source` = $del_number");//Находим такой приказ
     if ($ex == false) {	echo "SQL ошибка";exit();	}
