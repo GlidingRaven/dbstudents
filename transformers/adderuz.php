@@ -7,7 +7,7 @@
 	$hash1 = md5($password);			// Хешируем
 	$salt = $config[salt];				// Соль
 	$saltedHash = md5($hash1 . $salt);	// Складываем старый хеш с солью и пропускаем через функцию md5()
-	if ($saltedHash <> '56e1a81b86f358933a1ba6af32f57c86') {	echo "Access Denited.";exit();	}
+	if ($saltedHash <> '3a38907753c8f7340a8b4bcaf9490ce7') {	echo "Access Denited.";exit();	}
 
 
     $sqlconnect = mysql_connect($config[user], $config[database], $config[password]);

@@ -150,7 +150,8 @@
           <tbody>';
     for($i=1;$i<=$count_found;$i++) {
             $arr = mysql_fetch_array($report);
-            if ($arr[sum]==555) {$sum = "б/э";} else {$sum = $arr[sum];}//Правильный вывод суммы баллов
+            if ($arr[sum]==555) {$sum = "б/э";}
+            elseif ($arr[sum]==666) {$sum = "отчислен(а)";} else {$sum = $arr[sum];}//Правильный вывод суммы баллов
             echo "<tr><td>".$i.
             '</td><td><a href="/ci/'.$arr[city_code].'">'.$arr[city_name].
             '</a></td><td><a href="/uz/'.$arr[code_UZ].'">'.$arr[abb_name_UZ].

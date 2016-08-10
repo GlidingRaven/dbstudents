@@ -108,7 +108,8 @@
 
     for($i=2;$i<=$count_students;$i++) {
             $arr = mysql_fetch_array($report);
-            if ($arr[sum]==555) {$sum = "б/э";} else {$sum = $arr[sum];}//Правильный вывод суммы баллов
+            if ($arr[sum]==555) {$sum = "б/э";}
+            elseif ($arr[sum]==666) {$sum = "отчислен(а)";} else {$sum = $arr[sum];}//Правильный вывод суммы баллов
             echo "<tr><td>".$i.
             '</td><td>'.$arr[city_name].
             '</td><td>'.$arr[abb_name_UZ].

@@ -54,7 +54,7 @@
     $count_UZ = $report[count_UZ];
     $count_students = $report[count_students];
 
-    $report = mysql_query("SELECT * FROM `campuses` WHERE `city_code` = $city_code");
+    $report = mysql_query("SELECT * FROM `campuses` WHERE `city_code` = $city_code ORDER BY count_students DESC");
 
     if ($report == false) {
         echo "This source does not exist [2]";
