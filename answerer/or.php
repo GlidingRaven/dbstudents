@@ -1,6 +1,6 @@
 <?php
 
-    $config = parse_ini_file("/home/rainadmin/openstudents.ru/config.ini");
+    require $_SERVER['DOCUMENT_ROOT'].'/config.php';
 
     /**
      * Функция возвращает окончание для множественного числа слова на основании числа и массива окончаний
@@ -37,9 +37,9 @@
     	exit();
     }
 
-    $sqlconnect = mysql_connect($config[user], $config[database], $config[password]);
+    $sqlconnect = mysql_connect($config_user, $config_database, $config_password);
     if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
-    mysql_select_db($config[database]);
+    mysql_select_db($config_database);
 
     $report = mysql_query("SELECT * FROM `sources` WHERE `code_source` = $number");
     $report = mysql_fetch_array($report);

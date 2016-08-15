@@ -1,11 +1,11 @@
 <?php
 
-	$config = parse_ini_file("/home/rainadmin/openstudents.ru/config.ini");
+	require $_SERVER['DOCUMENT_ROOT'].'/config.php';
 
 	////Единый блок авторизации
 	$password = preg_replace("/[^A-Za-z\d]/u", "", $_COOKIE["pass"]); // Берём куки и фильтруем
 	$hash1 = md5($password);			// Хешируем
-	$salt = $config[salt];				// Соль
+	$salt = $config_salt;				// Соль
 	$saltedHash = md5($hash1 . $salt);	// Складываем старый хеш с солью и пропускаем через функцию md5()
 	if ($saltedHash <> '3a38907753c8f7340a8b4bcaf9490ce7') {	echo "Access Denited.";exit();	}
 
@@ -22,14 +22,14 @@
 	////Дублирующий блок аутентификации
 	$password = preg_replace("/[^A-Za-z\d]/u", "", $_POST['del_pass']); // Берём куки и фильтруем
 	$hash1 = md5($password);			// Хешируем
-	$salt = $config[salt_cancel];		// Соль
+	$salt = $config_salt_cancel;		// Соль
 	$saltedHash = md5($hash1 . $salt);	// Складываем старый хеш с солью и пропускаем через функцию md5()
 	if ($saltedHash <> 'ce2bf0fac2983705f2a13d092079f800') {	echo "Пароль неверен";exit();	}
 
 
-    $sqlconnect = mysql_connect($config[user], $config[database], $config[password]);
+    $sqlconnect = mysql_connect($config_user, $config_database, $config_password);
     if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
-    mysql_select_db($config[database]);
+    mysql_select_db($config_database);
 
     $ex = mysql_query("SELECT * FROM `sources` WHERE `code_source` = $del_number");//Находим такой приказ
     if ($ex == false) {	echo "SQL ошибка";exit();	}

@@ -80,11 +80,11 @@
   
   if (intval($_POST['back'])==100) {stepback("");exit();}
 
-  $config = parse_ini_file("/home/rainadmin/openstudents.ru/config.ini");
+  require $_SERVER['DOCUMENT_ROOT'].'/config.php';
 
-  $sqlconnect = mysql_connect($config[user], $config[database], $config[password]);
+  $sqlconnect = mysql_connect($config_user, $config_database, $config_password);
   if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
-  mysql_select_db($config[database]);
+  mysql_select_db($config_database);
 
   $str = $_POST['bigtext'];
   $str = preg_replace('/[^А-ЯЁа-яё\d\s\n\.]/um', "", $str);
@@ -121,7 +121,7 @@
   $re_spec            = "/[^\d](\d{1,2}\.\d{2}\.\d{2})[^\d]/"; //Регулярка специальности
   $stud               = file('regex.txt');
   $re_stud            = $stud[0];                              //Регулярка нормального поиска (легко изменяемая)
-  $re_stud_easymode   = "/([А-ЯЁ]+)\s([А-ЯЁ]+)\s([А-ЯЁ]+)/u"; //Регулярка поиска в режиме "б/э"
+  $re_stud_easymode   = "/\d\.\s([А-ЯЁ]+)\s([А-ЯЁ]+)\s([А-ЯЁ]+)/u"; //Регулярка поиска в режиме "б/э"
     
    
   $answer_specialization = preg_match_all($re_spec, $str, $matches_spec, PREG_OFFSET_CAPTURE);
@@ -132,7 +132,7 @@
   }
   
   $count_students = $answer_students;
-  if ($count_students>1500) {stepback("<kbd>".$count_students." студентов — это слишком много</kbd>");exit();}//Проверка на кол-во элементов
+  if ($count_students>2000) {stepback("<kbd>".$count_students." студентов — это слишком много</kbd>");exit();}//Проверка на кол-во элементов
 
     //Начали перевод ин-ции в более удобный вид
     if ($answer_students >= 1) {

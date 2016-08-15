@@ -1,6 +1,6 @@
 <?php
 
-    $config = parse_ini_file("/home/rainadmin/openstudents.ru/config.ini");
+    require $_SERVER['DOCUMENT_ROOT'].'/config.php';
 
     /**
      * Функция возвращает окончание для множественного числа слова на основании числа и массива окончаний
@@ -52,41 +52,48 @@
 
     $count_input_data = 0;
     $sqlending = "";
+    $history = "";
 
     if (strlen($surname)>0) {
     	$sqlending .= " `surname` LIKE '".$surname."'";
+        $history .= $surname;
     	$count_input_data++;
-    }
+    } else {$history .= "_";}
 
     if (strlen($name)>0) {
     	if (strlen($sqlending)>0) {$sqlending .= " AND";}
     	$sqlending .= " `name` LIKE '".$name."'";
+        $history .= $name;
     	$count_input_data++;
-    }
+    } else {$history .= "_";}
 
     if (strlen($patronymic)>0) {
     	if (strlen($sqlending)>0) {$sqlending .= " AND";}
     	$sqlending .= " `patronymic` LIKE '".$patronymic."'";
+        $history .= $patronymic;
     	$count_input_data++;
-    }
+    } else {$history .= "_";}
 
     if (strlen($city)>0) {
     	if (strlen($sqlending)>0) {$sqlending .= " AND";}
     	$sqlending .= " `city_name` LIKE '".$city."'";
+        $history .= $city;
     	$count_input_data++;
-    }
+    } else {$history .= "_";}
 
     if (strlen($vuz)>0) {
     	if (strlen($sqlending)>0) {$sqlending .= " AND";}
     	$sqlending .= " `abb_name_UZ` LIKE '".$vuz."'";
+        $history .= $vuz;
     	$count_input_data++;
-    }
+    } else {$history .= "_";}
 
     if (strlen($specialization)>0) {
     	if (strlen($sqlending)>0) {$sqlending .= " AND";}
     	$sqlending .= " `specialization` LIKE '".$specialization."'";
+        $history .= $specialization;
     	$count_input_data++;
-    }
+    } else {$history .= "_";}
 
     if (strlen($from)>0) {
         $count_input_data++;
@@ -120,9 +127,9 @@
     	exit();
     }
 
-    $sqlconnect = mysql_connect($config[user], $config[database], $config[password]);
+    $sqlconnect = mysql_connect($config_user, $config_database, $config_password);
     if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
-    mysql_select_db($config[database]);
+    mysql_select_db($config_database);
 
     //Находим количество строк, отвечающих запросу
     $report = mysql_query("SELECT COUNT(*) FROM `students` WHERE".$sqlending);
@@ -131,8 +138,8 @@
 
     //Сохраняем историю
     $fp = fopen('history.txt', "a");
-    $history = $count_found."\n".$sqlending."\n";
-    fwrite($fp, $history);
+    $historys = $count_found."\n".$_SERVER['REMOTE_ADDR']."\n".$_SERVER['HTTP_USER_AGENT']."\n".$history."\n";
+    fwrite($fp, $historys);
     fclose($fp);
 
     if ($count_found == 0) { echo "По данному запросу ничего не найдено"; exit(); }

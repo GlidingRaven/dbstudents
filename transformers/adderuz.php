@@ -1,18 +1,18 @@
 <?php
 
-	$config = parse_ini_file("/home/rainadmin/openstudents.ru/config.ini");
+	require $_SERVER['DOCUMENT_ROOT'].'/config.php';
 
 	////Единый блок авторизации
 	$password = preg_replace("/[^A-Za-z\d]/u", "", $_COOKIE["pass"]); // Берём куки и фильтруем
 	$hash1 = md5($password);			// Хешируем
-	$salt = $config[salt];				// Соль
+	$salt = $config_salt;				// Соль
 	$saltedHash = md5($hash1 . $salt);	// Складываем старый хеш с солью и пропускаем через функцию md5()
 	if ($saltedHash <> '3a38907753c8f7340a8b4bcaf9490ce7') {	echo "Access Denited.";exit();	}
 
 
-    $sqlconnect = mysql_connect($config[user], $config[database], $config[password]);
+    $sqlconnect = mysql_connect($config_user, $config_database, $config_password);
     if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
-    mysql_select_db($config[database]);
+    mysql_select_db($config_database);
 
 	$city_code =	intval($_POST['city_code']);
 	$full_name_uz =	preg_replace("/[^А-Яа-яЁё\-\s]/u", "", $_POST['full_name_uz']);
