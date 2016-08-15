@@ -129,6 +129,12 @@
     $report = mysql_fetch_array($report);
     $count_found = $report[0];
 
+    //Сохраняем историю
+    $fp = fopen('history.txt', "a");
+    $history = $count_found."\n".$sqlending."\n";
+    fwrite($fp, $history);
+    fclose($fp);
+
     if ($count_found == 0) { echo "По данному запросу ничего не найдено"; exit(); }
 
     if ($count_found > 1500) { echo "Количество результатов больше 1500. Уточните запрос"; exit(); }

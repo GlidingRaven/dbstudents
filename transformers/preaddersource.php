@@ -54,8 +54,15 @@
                   $("textarea.regex-example").highlightWithinTextarea(onInputRegex);
                 </script>
                 <div class="row">
-                  <div class="col-md-5"><button type="button" class="btn btn-primary btn-lg" id="buttonforsource" href="#">Ввод</button></div>
-                  <div class="col-md-7">'.$strabb.'</div>
+                  <div class="col-md-3"><button type="button" class="btn btn-primary btn-lg" id="buttonforsource" href="#">Ввод</button></div>
+                  <div class="col-md-3">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" id="readmode"> Режим "б/э"
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">'.$strabb.'</div>
                 </div>'."
                 <script>
                   $('#bigtext').val(sessionStorage.bigtext);
@@ -65,6 +72,9 @@
                   $('#date_month').val(sessionStorage.datemonth);
                   $('#date_year').val(sessionStorage.dateyear);
                   $('#comment').val(sessionStorage.comment);
+                  if (sessionStorage.readmode == 'true') {
+                    $('#readmode').attr('checked', 'checked');
+                  }
                 </script>
 ";}
   
@@ -86,6 +96,10 @@
   $date_month = intval($_POST['date_month']);
   $date_year =  intval($_POST['date_year']);
   $comment =    mysql_real_escape_string($_POST['comment']);
+  if ($_POST['readmode'] == "true") {$mode = true;}
+
+
+
 
   if ((strlen($str)==0)or(strlen($name_uz)==0)or(strlen($url_source)==0)or($date_day<1)or($date_day>31)or($date_month<1)or($date_month>12)or($date_year<2015)or($date_year>2020))
   {stepback("<kbd>Неполное заполнение или неверный формат</kbd>");exit();}//Всё ли есть?
@@ -104,27 +118,46 @@
   $code_source = $max_of_code_source[0] + 1;
   $count_students = 0;
 
-  $re_spec = "/[^\d](\d{1,2}\.\d{2}\.\d{2})[^\d]/";
-  $stud = file('regex.txt'); $re_stud = $stud[0];
+  $re_spec            = "/[^\d](\d{1,2}\.\d{2}\.\d{2})[^\d]/"; //Регулярка специальности
+  $stud               = file('regex.txt');
+  $re_stud            = $stud[0];                              //Регулярка нормального поиска (легко изменяемая)
+  $re_stud_easymode   = "/([А-ЯЁ]+)\s([А-ЯЁ]+)\s([А-ЯЁ]+)/u"; //Регулярка поиска в режиме "б/э"
     
    
   $answer_specialization = preg_match_all($re_spec, $str, $matches_spec, PREG_OFFSET_CAPTURE);
-  $answer_students = preg_match_all($re_stud, $str, $matches_stud, PREG_OFFSET_CAPTURE);
-
+  if ($mode) {
+    $answer_students = preg_match_all($re_stud_easymode, $str, $matches_stud, PREG_OFFSET_CAPTURE);
+  } else {
+    $answer_students = preg_match_all($re_stud, $str, $matches_stud, PREG_OFFSET_CAPTURE);
+  }
+  
   $count_students = $answer_students;
-  if ($count_students>1024) {stepback("<kbd>".$count_students." студентов — это слишком много</kbd>");exit();}//Проверка на кол-во элементов
+  if ($count_students>1500) {stepback("<kbd>".$count_students." студентов — это слишком много</kbd>");exit();}//Проверка на кол-во элементов
 
     //Начали перевод ин-ции в более удобный вид
     if ($answer_students >= 1) {
       $count_students = $answer_students;
-      for ($i=0; $i < $answer_students; $i++) { 
-        $db_students[$i][0] = $matches_stud[0][$i][1];//position in original text
-        $db_students[$i][1] = $matches_stud[1][$i][0];//surname
-        $db_students[$i][2] = $matches_stud[2][$i][0];//name
-        $db_students[$i][3] = $matches_stud[3][$i][0];//patronymic
-        $db_students[$i][4] = $matches_stud[4][$i][0];//sum
-        $db_students[$i][5] = "00.00.00";//specialization
+      if ($mode) {
+          for ($i=0; $i < $answer_students; $i++) { 
+          $db_students[$i][0] = $matches_stud[0][$i][1];  //position in original text
+          $db_students[$i][1] = $matches_stud[1][$i][0];  //surname
+          $db_students[$i][2] = $matches_stud[2][$i][0];  //name
+          $db_students[$i][3] = $matches_stud[3][$i][0];  //patronymic
+          $db_students[$i][4] = 555;  //sum
+          $db_students[$i][5] = "00.00.00";               //specialization
+        }
       }
+      else {
+          for ($i=0; $i < $answer_students; $i++) { 
+          $db_students[$i][0] = $matches_stud[0][$i][1];  //position in original text
+          $db_students[$i][1] = $matches_stud[1][$i][0];  //surname
+          $db_students[$i][2] = $matches_stud[2][$i][0];  //name
+          $db_students[$i][3] = $matches_stud[3][$i][0];  //patronymic
+          $db_students[$i][4] = $matches_stud[4][$i][0];  //sum
+          $db_students[$i][5] = "00.00.00";               //specialization
+        }
+      }
+      
       //Расстановка специальностей
       if ($answer_specialization >= 1) {
         for ($i=0; $i < $answer_specialization; $i++) {

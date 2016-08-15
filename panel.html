@@ -4,9 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -166,8 +163,15 @@
                   $("textarea.regex-example").highlightWithinTextarea(onInputRegex);
                 </script>
                 <div class="row">
-                  <div class="col-md-5"><button type="button" class="btn btn-primary btn-lg" id="buttonforsource" href="#">Ввод</button></div>
-                  <div class="col-md-7"></div>
+                  <div class="col-md-3"><button type="button" class="btn btn-primary btn-lg" id="buttonforsource" href="#">Ввод</button></div>
+                  <div class="col-md-3">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" id="readmode"> Режим "б/э"
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6"></div>
                 </div>
             </div>
             
@@ -200,17 +204,18 @@
                 <p><button type="button" class="btn btn-primary btn-lg" id="buttonforcity" href="#">Ввод</button></p>
             </div>
             <div role="tabpanel" class="tab-pane" id="reference">
-                <h1 class="page-header">Справка (в помощь оператору)</h1>
+                <h1 class="page-header">Справка</h1>
                 <h3>Примечание</h3>
                 <p>Подсветка текста моделирует работу обработчика, не игнорируйте её</p>
                 <p>Для обозначения студентов, поступивших без экзаменов, используйте сумму баллов <b>555</b></p>
+                <p>Для обозначения отчисленных студентов, используйте сумму баллов <b>666</b></p>
                 <p>При отсутствии отчества используйте слово <b>Анон</b></p>
                 <h3>Ошибки при добавлении</h3>
                 <p>fail - ошибка клиент-сервер</p>
             </div>
             
             <div role="tabpanel" class="tab-pane" id="handbook">
-                <h1 class="page-header">Обновление regex\'a</h1>
+                <h1 class="page-header">Обновление regex'a</h1>
                 <p><a href="#source" class="btn btn-primary" aria-controls="source" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a></p>
                 <div class="input-group">
                   <span class="input-group-addon" id="basic-addon1">Выражение</span>
