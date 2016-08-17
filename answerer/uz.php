@@ -49,16 +49,16 @@
         exit();
     }
 
-    $city_code = $report[city_code];
-    $full_name_UZ = $report[full_name_UZ];
-    $abb_name_UZ = $report[abb_name_UZ];
-    $code_UZ = $report[code_UZ];
-    $count_students = $report[count_students];
-    $count_sources = $report[count_sources];
-    $url_site = $report[url_site];
+    $city_code =        $report[city_code];
+    $full_name_UZ =     $report[full_name_UZ];
+    $abb_name_UZ =      $report[abb_name_UZ];
+    $code_UZ =          $report[code_UZ];
+    $count_students =   $report[count_students];
+    $count_sources =    $report[count_sources];
+    $url_site =         $report[url_site];
 
     $city = mysql_fetch_array(mysql_query("SELECT * FROM `fatherland` WHERE `city_code` LIKE '$city_code'"));//Нахождение названия города
-    $city_name = $city[city_name];
+    $city_name =        $city[city_name];
 
     $report = mysql_query("SELECT * FROM `sources` WHERE `code_UZ` = $code_UZ");
 
@@ -67,11 +67,10 @@
         exit();
     }
 
-    $title = "Open Students | ".$abb_name_UZ;
-    $description = "Open students – это инновационный сервис по поиску и хранению информации о студентах российских ВУЗов. Структурированный архив приказов о зачислении в Российские ВУЗы. Предназначен для хранения информации о студентах. Списки сортируются по дате издания, учебному заведению и городу.";
-    $keywords = $abb_name_UZ.", студенты, зачисление, приказы, абитуриенты, списки, образование, FAQ, рейтинг, база данных, архив, ВУЗ, сервис";
+    $title = $abb_name_UZ;
+    $keywords = $abb_name_UZ;
 
-    $title = preg_replace('/\s/u','%20',$title);$description = preg_replace('/\s/u','%20',$description);$keywords = preg_replace('/\s/u','%20',$keywords);$a=file_get_contents("http://openstudents.ru/templates/header.php?title=".$title."&description=".$description."&keywords=".$keywords);echo ($a);
+    $title = preg_replace('/\s/u','%20',$title);$keywords = preg_replace('/\s/u','%20',$keywords);$a=file_get_contents("http://openstudents.ru/templates/header.php?title=$title&keywords=$keywords");echo ($a);
 
     echo '
             <div class="collapse navbar-collapse">
@@ -88,10 +87,10 @@
     ';
 
 
-    echo '
-        <h1>'.$city_name.' / '.$abb_name_UZ.'</h1>
-        <h2>'.$full_name_UZ.'</h2>
-        <h3>Индексированно '.$count_sources.' '.getNumEnding($count_sources, array('приказ', 'приказа', 'приказов')).
+    echo "
+        <h1>$city_name / $abb_name_UZ</h1>
+        <h2>$full_name_UZ</h2>
+        <h3>Индексированно $count_sources ".getNumEnding($count_sources, array('приказ', 'приказа', 'приказов')).
         ' о зачислении ('.$count_students.' '.getNumEnding($count_students, array('студент', 'студента', 'студентов')).')</h3>
         <h4><a href="'.$url_site.'" target="_blank">Сайт вуза</a></h4>';
     if ($count_sources <> 0) {

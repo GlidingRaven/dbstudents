@@ -49,13 +49,13 @@
     	exit();
     }
 
-    $date = $report[date];
-    $code_source = $report[code_source];
-    $code_UZ = $report[code_UZ];
-    $abb_name_UZ = $report[abb_name_UZ];
-    $link = $report[link];
-    $count_students = $report[count_students];
-    $comment = $report[comment];
+    $date =             $report[date];
+    $code_source =      $report[code_source];
+    $code_UZ =          $report[code_UZ];
+    $abb_name_UZ =      $report[abb_name_UZ];
+    $link =             $report[link];
+    $count_students =   $report[count_students];
+    $comment =          $report[comment];
 
     $report = mysql_query("SELECT * FROM `students` WHERE `code_source` = $number");
 
@@ -64,22 +64,20 @@
     	exit();
     }
 
-    $first_student= mysql_fetch_array($report);
-    $city_name = $first_student[city_name];
-    $city_code = $first_student[city_code];
-    $code_UZ = $first_student[code_UZ];
+    $first_student =    mysql_fetch_array($report);
+    $city_name =        $first_student[city_name];
+    $city_code =        $first_student[city_code];
+    $code_UZ =          $first_student[code_UZ];
+    $surname =          $first_student[surname];
+    $name =             $first_student[name];
+    $patronymic =       $first_student[patronymic];
+    $sum =              $first_student[sum]; if ($sum==555) {$sum = "б/э";}
+    $specialization =   $first_student[specialization];
 
-    $surname = $first_student[surname];
-    $name = $first_student[name];
-    $patronymic = $first_student[patronymic];
-    $sum = $first_student[sum]; if ($sum==555) {$sum = "б/э";}
-    $specialization = $first_student[specialization];
+    $title = "Приказ №$number";
+    $keywords = "приказ на зачисление, $abb_name_UZ";
 
-    $title = "Open Students | Приказ №$number";
-    $description = "Open students – это инновационный сервис по поиску и хранению информации о студентах российских ВУЗов. Структурированный архив приказов о зачислении в Российские ВУЗы. Предназначен для хранения информации о студентах. Списки сортируются по дате издания, учебному заведению и городу.";
-    $keywords = "студенты, зачисление, приказы, абитуриенты, списки, образование, FAQ, рейтинг, база данных, архив, ВУЗ, сервис";
-
-    $title = preg_replace('/\s/u','%20',$title);$description = preg_replace('/\s/u','%20',$description);$keywords = preg_replace('/\s/u','%20',$keywords);$a=file_get_contents("http://openstudents.ru/templates/header.php?title=".$title."&description=".$description."&keywords=".$keywords);echo ($a);
+    $title = preg_replace('/\s/u','%20',$title);$keywords = preg_replace('/\s/u','%20',$keywords);$a=file_get_contents("http://openstudents.ru/templates/header.php?title=$title&keywords=$keywords");echo ($a);
 
     echo '
             <div class="collapse navbar-collapse">
@@ -96,15 +94,15 @@
       <div id="page_content">
     ';
 
-    echo '
-    	<h1>'.$city_name.' / '.$abb_name_UZ.' / Приказ №'.$number.' от '.$date.'</h1>
-      <h2>'.$comment.'</h2>
-    	<h3>Приказ о зачислении '.$count_students.' '.getNumEnding($count_students, array('студента', 'студентов', 'студентов')).'</h3>
+    echo "
+    	<h1>$city_name / $abb_name_UZ / Приказ №$number от $date</h1>
+        <h2>$comment</h2>
+    	<h3>Приказ о зачислении $count_students ".getNumEnding($count_students, array('студента', 'студентов', 'студентов')).'</h3>
     	<h4 class="text-right"><a href="'.$link.'" target="_blank">Ссылка на источник</a></h4>
     	<table class="table table-striped">
           <thead><tr><th>#</th><th>Город</th><th>ВУЗ</th><th>Приказ</th><th>Фамилия</th><th>Имя</th><th>Отчёство</th><th>Сумма</th><th>Специальность</th></tr></thead>
           <tbody>';
-    echo '<tr><td>1</td><td>'.$city_name.'</td><td>'.$abb_name_UZ.'</td><td>Приказ '.$number.'</td><td>'.$surname.'</td><td>'.$name.'</td><td>'.$patronymic.'</td><td>'.$sum.'</td><td>'.$specialization.'</td></tr>';
+    echo "<tr><td>1</td><td>$city_name</td><td>$abb_name_UZ</td><td>Приказ $number</td><td>$surname</td><td>$name</td><td>$patronymic</td><td>$sum</td><td>$specialization</td></tr>";
 
     for($i=2;$i<=$count_students;$i++) {
             $arr = mysql_fetch_array($report);

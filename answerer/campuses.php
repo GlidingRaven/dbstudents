@@ -40,11 +40,10 @@
     $count_students = mysql_fetch_array($count_students);
     $count_students = $count_students[0];
 
-    $title = "Open Students | ВУЗы";
-    $description = "Open students – это инновационный сервис по поиску и хранению информации о студентах российских ВУЗов. Структурированный архив приказов о зачислении в Российские ВУЗы. Предназначен для хранения информации о студентах. Списки сортируются по дате издания, учебному заведению и городу.";
-    $keywords = "студенты, вузы, зачисление, приказы, абитуриенты, списки, образование, FAQ, рейтинг, база данных, архив, ВУЗ, сервис";
+    $title = "ВУЗы";
+    $keywords = "вузы";
 
-    $title = preg_replace('/\s/u','%20',$title);$description = preg_replace('/\s/u','%20',$description);$keywords = preg_replace('/\s/u','%20',$keywords);$a=file_get_contents("http://openstudents.ru/templates/header.php?title=".$title."&description=".$description."&keywords=".$keywords);echo ($a);
+    $title = preg_replace('/\s/u','%20',$title);$keywords = preg_replace('/\s/u','%20',$keywords);$a=file_get_contents("http://openstudents.ru/templates/header.php?title=$title&keywords=$keywords");echo ($a);
 
     echo '
             <div class="collapse navbar-collapse">
@@ -60,10 +59,10 @@
     ';
 
 
-    echo '
+    echo "
         <h1>ВУЗы</h1>
-        <h3>В базу данных занёсено '.$count_uz.' '.getNumEnding($count_uz, array('ВУЗ', 'ВУЗа', 'ВУЗов')).
-        ', а это '.$count_students.' '.getNumEnding($count_students, array('студент', 'студента', 'студентов')).'</h3>';
+        <h3>В базу данных занёсено $count_uz ".getNumEnding($count_uz, array('ВУЗ', 'ВУЗа', 'ВУЗов')).
+        ", а это $count_students ".getNumEnding($count_students, array('студент', 'студента', 'студентов'))."</h3>";
     if ($count_uz <> 0) {
         echo '
             <table class="table table-striped">

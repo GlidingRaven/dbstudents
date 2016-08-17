@@ -49,10 +49,10 @@
         exit();
     }
 
-    $city_name = $report[city_name];
-    $city_code = $report[city_code];
-    $count_UZ = $report[count_UZ];
-    $count_students = $report[count_students];
+    $city_name =        $report[city_name];
+    $city_code =        $report[city_code];
+    $count_UZ =         $report[count_UZ];
+    $count_students =   $report[count_students];
 
     $report = mysql_query("SELECT * FROM `campuses` WHERE `city_code` = $city_code ORDER BY count_students DESC");
 
@@ -61,11 +61,10 @@
         exit();
     }
 
-    $title = "Open Students | ".$city_name;
-    $description = "Open students – это инновационный сервис по поиску и хранению информации о студентах российских ВУЗов. Структурированный архив приказов о зачислении в Российские ВУЗы. Предназначен для хранения информации о студентах. Списки сортируются по дате издания, учебному заведению и городу.";
-    $keywords = $city_name.", студенты, зачисление, приказы, абитуриенты, списки, образование, FAQ, рейтинг, база данных, архив, ВУЗ, сервис";
+    $title = $city_name;
+    $keywords = $city_name;
 
-    $title = preg_replace('/\s/u','%20',$title);$description = preg_replace('/\s/u','%20',$description);$keywords = preg_replace('/\s/u','%20',$keywords);$a=file_get_contents("http://openstudents.ru/templates/header.php?title=".$title."&description=".$description."&keywords=".$keywords);echo ($a);
+    $title = preg_replace('/\s/u','%20',$title);$keywords = preg_replace('/\s/u','%20',$keywords);$a=file_get_contents("http://openstudents.ru/templates/header.php?title=$title&keywords=$keywords");echo ($a);
 
     echo '
             <div class="collapse navbar-collapse">
@@ -81,10 +80,10 @@
     ';
 
 
-    echo '
-        <h1>'.$city_name.'</h1>
-        <h3>В этом городе индексированно '.$count_UZ.' '.getNumEnding($count_UZ, array('ВУЗов', 'ВУЗа', 'ВУЗов')).
-        ', а это '.$count_students.' '.getNumEnding($count_students, array('студент', 'студента', 'студентов')).'</h3>';
+    echo "
+        <h1>$city_name</h1>
+        <h3>В этом городе индексированно $count_UZ ".getNumEnding($count_UZ, array('ВУЗов', 'ВУЗа', 'ВУЗов')).
+        ", а это $count_students ".getNumEnding($count_students, array('студент', 'студента', 'студентов'))."</h3>";
     if ($count_UZ <> 0) {
         echo '
             <table class="table table-striped">

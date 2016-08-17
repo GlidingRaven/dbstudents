@@ -55,42 +55,42 @@
     $history = "";
 
     if (strlen($surname)>0) {
-    	$sqlending .= " `surname` LIKE '".$surname."'";
+    	$sqlending .= " `surname` LIKE '$surname'";
         $history .= $surname;
     	$count_input_data++;
     } else {$history .= "_";}
 
     if (strlen($name)>0) {
     	if (strlen($sqlending)>0) {$sqlending .= " AND";}
-    	$sqlending .= " `name` LIKE '".$name."'";
+    	$sqlending .= " `name` LIKE '$name'";
         $history .= $name;
     	$count_input_data++;
     } else {$history .= "_";}
 
     if (strlen($patronymic)>0) {
     	if (strlen($sqlending)>0) {$sqlending .= " AND";}
-    	$sqlending .= " `patronymic` LIKE '".$patronymic."'";
+    	$sqlending .= " `patronymic` LIKE '$patronymic'";
         $history .= $patronymic;
     	$count_input_data++;
     } else {$history .= "_";}
 
     if (strlen($city)>0) {
     	if (strlen($sqlending)>0) {$sqlending .= " AND";}
-    	$sqlending .= " `city_name` LIKE '".$city."'";
+    	$sqlending .= " `city_name` LIKE '$city'";
         $history .= $city;
     	$count_input_data++;
     } else {$history .= "_";}
 
     if (strlen($vuz)>0) {
     	if (strlen($sqlending)>0) {$sqlending .= " AND";}
-    	$sqlending .= " `abb_name_UZ` LIKE '".$vuz."'";
+    	$sqlending .= " `abb_name_UZ` LIKE '$vuz'";
         $history .= $vuz;
     	$count_input_data++;
     } else {$history .= "_";}
 
     if (strlen($specialization)>0) {
     	if (strlen($sqlending)>0) {$sqlending .= " AND";}
-    	$sqlending .= " `specialization` LIKE '".$specialization."'";
+    	$sqlending .= " `specialization` LIKE '$specialization'";
         $history .= $specialization;
     	$count_input_data++;
     } else {$history .= "_";}
@@ -150,7 +150,7 @@
     echo ($a);
 
     //А теперь полноценный запрос
-    $report = mysql_query("SELECT * FROM `students` WHERE".$sqlending);
+    $report = mysql_query("SELECT * FROM `students` WHERE$sqlending");
 
     //Менеджер страниц
     if (strlen($page)==0) {$page = 1;}

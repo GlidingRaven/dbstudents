@@ -41,11 +41,10 @@
     $count_students = mysql_fetch_array($count_students);
     $count_students = $count_students[0];
 
-    $title = "Open Students | Города";
-    $description = "Open students – это инновационный сервис по поиску и хранению информации о студентах российских ВУЗов. Структурированный архив приказов о зачислении в Российские ВУЗы. Предназначен для хранения информации о студентах. Списки сортируются по дате издания, учебному заведению и городу.";
-    $keywords = "студенты, города, зачисление, приказы, абитуриенты, списки, образование, FAQ, рейтинг, база данных, архив, ВУЗ, сервис";
+    $title = "Города";
+    $keywords = "города";
 
-    $title = preg_replace('/\s/u','%20',$title);$description = preg_replace('/\s/u','%20',$description);$keywords = preg_replace('/\s/u','%20',$keywords);$a=file_get_contents("http://openstudents.ru/templates/header.php?title=".$title."&description=".$description."&keywords=".$keywords);echo ($a);
+    $title = preg_replace('/\s/u','%20',$title);$keywords = preg_replace('/\s/u','%20',$keywords);$a=file_get_contents("http://openstudents.ru/templates/header.php?title=$title&keywords=$keywords");echo ($a);
 
     echo '
             <div class="collapse navbar-collapse">
@@ -61,10 +60,10 @@
     ';
 
 
-    echo '
+    echo "
         <h1>Города</h1>
-        <h3>В базу данных занёсено '.$count_citys.' '.getNumEnding($count_citys, array('город', 'города', 'городов')).
-        ', а это '.$count_students.' '.getNumEnding($count_students, array('студент', 'студента', 'студентов')).'</h3>';
+        <h3>В базу данных занёсено $count_citys ".getNumEnding($count_citys, array('город', 'города', 'городов')).
+        ", а это $count_students ".getNumEnding($count_students, array('студент', 'студента', 'студентов'))."</h3>";
     if ($count_citys <> 0) {
         echo '
             <table class="table table-striped">
