@@ -13,11 +13,6 @@ RewriteRule ^adm/panel$ /adm/panel.html [L]
 
 RewriteRule ^(([^/]+/)*[^.]+)$ /$1.php [L]
 
-#Защищаем ini файлы
-<FilesMatch "\.(ini)$">
-Order allow,deny
-Deny from all
-</FilesMatch>
 
 ErrorDocument 403 /403.php
 ErrorDocument 404 /404.php
