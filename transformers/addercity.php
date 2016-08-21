@@ -9,9 +9,9 @@
 	if (strlen($city) == 0) { echo ("Введи название города"); exit(); }
 
 
-    $sqlconnect = mysql_connect($config_user, $config_database, $config_password);
-    if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
-    mysql_select_db($config_database);
+	$sqlconnect = mysql_connect($config_user, $config_database, $config_password);
+	if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
+	mysql_select_db($config_database);
 
 	$report   = mysql_query("SELECT * FROM `fatherland` WHERE `city_name` = '$city'"); //Проверка на существование города
 	$sql_rows = mysql_num_rows($report);

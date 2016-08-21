@@ -1,8 +1,8 @@
 <?php
-
-    require $_SERVER['DOCUMENT_ROOT'].'/config.php';
-
-    require $_SERVER['DOCUMENT_ROOT'].'/loginbox.php';
+ 
+  require $_SERVER['DOCUMENT_ROOT'].'/config.php';
+  
+  require $_SERVER['DOCUMENT_ROOT'].'/loginbox.php';
 
     echo
   '<!DOCTYPE html>

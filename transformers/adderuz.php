@@ -5,9 +5,9 @@
 	require $_SERVER['DOCUMENT_ROOT'].'/loginbox.php';
 
 
-    $sqlconnect = mysql_connect($config_user, $config_database, $config_password);
-    if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
-    mysql_select_db($config_database);
+	$sqlconnect = mysql_connect($config_user, $config_database, $config_password);
+	if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
+	mysql_select_db($config_database);
 
 	$city_code =	intval($_POST['city_code']);
 	$full_name_uz =	preg_replace("/[^А-Яа-яЁё\-\s]/u", "", $_POST['full_name_uz']);

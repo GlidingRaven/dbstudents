@@ -10,8 +10,8 @@
 
 	$del_pass = $_POST['del_pass'];
 
-    if ((strlen($del_number)==0)or(strlen($del_pass)==0)) {	echo "Введены не все поля";exit();	}
-    if (($del_number<=0)or($del_number>2000)) {				echo "Номер приказа неправильный";exit();	}
+	if ((strlen($del_number)==0)or(strlen($del_pass)==0)) {	echo "Введены не все поля";exit();	}
+	if (($del_number<=0)or($del_number>2000)) {				echo "Номер приказа неправильный";exit();	}
 
 
 	////Дублирующий блок аутентификации
@@ -22,15 +22,15 @@
 	if ($saltedHash <> 'ce2bf0fac2983705f2a13d092079f800') {	echo "Пароль неверен";exit();	}
 
 
-    $sqlconnect = mysql_connect($config_user, $config_database, $config_password);
-    if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
-    mysql_select_db($config_database);
+	$sqlconnect = mysql_connect($config_user, $config_database, $config_password);
+	if (!$sqlconnect) {die('Ошибка соединения: ' . mysql_error());}
+	mysql_select_db($config_database);
 
-    $ex = mysql_query("SELECT * FROM `sources` WHERE `code_source` = $del_number");//Находим такой приказ
-    if ($ex == false) {	echo "SQL ошибка";exit();	}
+	$ex = mysql_query("SELECT * FROM `sources` WHERE `code_source` = $del_number");//Находим такой приказ
+	if ($ex == false) {	echo "SQL ошибка";exit();	}
 
-    $rez = mysql_fetch_array($ex);
-    if ($rez == 0) {	echo "Такого приказа нет";exit();	}
+	$rez = mysql_fetch_array($ex);
+	if ($rez == 0) {	echo "Такого приказа нет";exit();	}
 
 	$count = mysql_num_rows($ex);
 	if ($count <> 1) {	echo "Найдено несколько подобных приказов. Запрос брошен. Проверь БД.";exit();	}
@@ -50,14 +50,13 @@
 	$count_searched = $ex[0];
 	if ($count_searched <> $count_students) {echo "Количество студентов в базе не равно количеству заявленных в приказе! Запрос сброшен.";exit();}
 
-						// Ниже начинается "боевой" блок удаления/обновления БД
+					// Ниже начинается "боевой" блок удаления/обновления БД
 
 	$ex = mysql_query("DELETE FROM `students` WHERE `code_source` = $del_number");	//Удаляем студентов
 	if ($ex == false) {	echo "Ошибка SQL при попытке удаления студентов. Проверь БД";exit();	}
 
 	$ex = mysql_query("DELETE FROM `sources` WHERE `code_source` = $del_number");	//Трём приказ
 	if ($ex == false) {	echo "Ошибка SQL при попытке удаления приказа. Проверь БД";exit();		}
-
 
 
 

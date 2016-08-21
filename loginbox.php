@@ -1,5 +1,5 @@
 <?php
-	//	Для работы требуется config.php
+	//Для работы требуется config.php
 	$password = preg_replace("/[^A-Za-z\d]/u", "", $_COOKIE["pass"]); // Берём куки и фильтруем
 	$hash1 = md5($password);			// Хешируем
 	$salt = $config_salt;				// Соль
