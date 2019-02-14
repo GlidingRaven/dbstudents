@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Highlight Within Textarea</title>
+
+		<!-- need jQuery, obviously -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<link href="./jquery.highlight-within-textarea.css" rel="stylesheet">
+		<script src="./jquery.highlight-within-textarea.js"></script>
+		<!-- make things pretty -->
+		<style>
+			@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto+Mono);
+
+			/* background and positioning */
+			.hwt-container {
+				background-color: #fff;
+			}
+
+			/* size and formatting */
+			.hwt-content {
+				width: 500px;
+				height: 100px;
+				padding: 20px;
+				color: #555;
+				font: 18px/25px 'Roboto Mono', sans-serif;
+			}
+
+			/* highlights */
+			.hwt-content mark {
+				border-radius: 3px;
+			}
+			.hwt-content mark:nth-of-type(2n) {
+				background-color: #cfdeab;
+			}
+			.hwt-content mark:nth-of-type(2n+1) {
+				background-color: #b1d5e5;
+			}
+		</style>
+	</head>
+	<body>
+
+			<textarea class="regex-example">1600 Pennsylvania Ave NW, Washington, DC 20500</textarea>
+			<script>
+				function onInputRegex(input) {return /([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s([А-ЯЁ][а-яё]+)\s.{0,20}?([1-9][0-9]{1,2})[^0-9]/g;}
+				$('textarea.regex-example').highlightWithinTextarea(onInputRegex);
+			</script>
+	</body>
+</html>
